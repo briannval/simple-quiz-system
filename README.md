@@ -29,7 +29,8 @@ just hopefully, ...increase the *average* for many classes.
 What this project will *do*:
 - Students can **create** a quiz for other students to attempt
 - Questions can be of a number answer format, a multiple choice format, or an essay format
-- Setting the questions in *three different formats* will allow flexiblity from courses like CPSC, CHEM, MATH, to even ENGL
+- Setting the questions in *three different formats* will allow flexiblity from courses like CPSC, CHEM, MATH, to even 
+ENGL
 - There will be a great variety of quizzes since all students are given the option to create quizzes.
 - Students will be able to star another student's quiz.
 - (ADDITIONAL) Add an instructor panel, which may give feedback on student's self-made exams, and 
@@ -39,13 +40,15 @@ An example of text with **bold** and *italic* fonts.
 ## User Story
 
 - As a user, I want to be able to create a quiz.
+  Example of ADD X to Y, where X = questions, and Y = quiz. Users will be able to add X to Y in a sense that 
 - As a user, I want to be able to attempt another user's quiz.
 - As a user, I want to be able to get feedback on my attempt.
 - As a user, I want to be able to star another user's quiz.
-- As a user, I want to be able to see the most popular quizzes.
 - As a user, I want to be able to create multiple choice questions.
 - As a user, I want to be able to create number answer questions.
-- As a user, I want to be able to create essay questions.
+- As a user, I want to be able to create true false questions.
+
+
 
 # Stack
 - Java JUnit testing
