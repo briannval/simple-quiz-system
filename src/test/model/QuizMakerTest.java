@@ -8,19 +8,19 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Test methods for the QuizMaker class
 public class QuizMakerTest {
     private QuizMaker test;
 
     @BeforeEach
     public void setup() {
-        test = new QuizMaker("Brian's Quiz",2,3,4);
+        test = new QuizMaker("Brian's Quiz", 8);
     }
 
     @Test
     public void testConstructor() {
-        assertEquals(2,test.getNumMultipleChoice());
-        assertEquals(3,test.getNumNumerical());
-        assertEquals(4,test.getNumTrueFalse());
+        assertEquals(8, test.getNumQuestion());
+        assertEquals("Brian's Quiz", test.getName());
     }
 
     @Test

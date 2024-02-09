@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 // Represents a numerical question with integer answer
 public class Numerical implements Question<Integer> {
     private final int correctAnswer;
@@ -68,6 +70,12 @@ public class Numerical implements Question<Integer> {
     @Override
     public boolean checkAnswer(Integer answer) {
         return this.correctAnswer == answer;
+    }
+
+    // Invalid for this particular class
+    @Override
+    public List<String> getChoices() {
+        return null;
     }
 
     public String getHint() {

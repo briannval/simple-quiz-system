@@ -5,17 +5,13 @@ import java.util.List;
 
 public class QuizMaker {
     private String name;
-    private int numMultipleChoice;
-    private int numNumerical;
-    private int numTrueFalse;
     private List<Question> questions;
+    private int numQuestion;
 
-    public QuizMaker(String name, int numMultipleChoice, int numNumerical, int numTrueFalse) {
+    public QuizMaker(String name, int numQuestion) {
         this.name = name;
-        this.numMultipleChoice = numMultipleChoice;
-        this.numNumerical = numNumerical;
-        this.numTrueFalse = numTrueFalse;
         this.questions = new ArrayList<>();
+        this.numQuestion = numQuestion;
     }
 
     public void addMultipleChoiceQuestion(char correctAnswer, String question, int points, List<String> choices) {
@@ -34,19 +30,15 @@ public class QuizMaker {
         return this.questions.get(index);
     }
 
-    public int getNumMultipleChoice() {
-        return this.numMultipleChoice;
+    public int getNumQuestion() {
+        return this.numQuestion;
     }
 
-    public int getNumNumerical() {
-        return this.numNumerical;
-    }
-
-    public int getNumTrueFalse() {
-        return this.numTrueFalse;
+    public String getName() {
+        return this.name;
     }
 
     public Quiz quizGenerator() {
-        return new Quiz(this.questions);
+        return new Quiz(this.questions,this.name);
     }
 }

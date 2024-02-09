@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// Test methods for the Quiz class
 public class QuizTest {
     private List<Question> questions;
     private Question sampleQuestionOne;
@@ -29,7 +30,7 @@ public class QuizTest {
         this.questions.add(new Numerical(1,"What is sin half pi?",5));
         this.questions.add(new TrueFalse("Is Kyoto the capital of Korea?",false,5));
         this.questions.add(new TrueFalse("Is Vancouver part of BC?",true,5));
-        test = new Quiz(questions);
+        test = new Quiz(questions, "Brian's quiz");
     }
 
     @Test
@@ -37,6 +38,7 @@ public class QuizTest {
         assertEquals(30,test.getMaxPoints());
         assertEquals(0,test.getStars());
         assertEquals(questions,test.getAllQuestions());
+        assertEquals("Brian's quiz",test.getName());
     }
 
     @Test

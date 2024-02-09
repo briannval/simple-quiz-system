@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+// Test method for the TrueFalse class
 public class TrueFalseTest {
     public TrueFalse firstProblem;
     public TrueFalse secondProblem;

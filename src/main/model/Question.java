@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 // Represents a question being able to output question
 // and check answer
 public interface Question<T> {
@@ -18,4 +20,6 @@ public interface Question<T> {
     String getFormat();
 
     boolean checkAnswer(T answer);
+
+    List<String> getChoices();
 }

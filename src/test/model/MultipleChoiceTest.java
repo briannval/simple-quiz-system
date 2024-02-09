@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
+// Test methods for the MultipleChoice class
 public class MultipleChoiceTest {
     MultipleChoice problem;
     List<String> choices;

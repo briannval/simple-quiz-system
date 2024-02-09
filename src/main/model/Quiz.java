@@ -13,6 +13,7 @@ public class Quiz {
     private int stars;
     private List<Question> questions;
     private int maxPoints;
+    private String name;
 
     /*
      * REQUIRES: questions of varying format (or same, if preferable)
@@ -20,12 +21,13 @@ public class Quiz {
      *          calculates the number of each type of question,
      *          and initializing stars to be 0
      */
-    public Quiz(List<Question> questions) {
+    public Quiz(List<Question> questions, String name) {
         this.questions = questions;
         for (Question question: questions) {
             this.maxPoints += question.getPoints();
         }
         this.stars = 0;
+        this.name = name;
     }
 
     /*
@@ -59,6 +61,10 @@ public class Quiz {
 
     public int getStars() {
         return this.stars;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     /*

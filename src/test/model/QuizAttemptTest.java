@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// Test methods for the QuizAttempt class
 public class QuizAttemptTest {
     private List<Question> questions;
     private Question sampleQuestionOne;
@@ -27,7 +28,7 @@ public class QuizAttemptTest {
         this.questions.add(new Numerical(1,"What is sin half pi?",5));
         this.questions.add(new TrueFalse("Is Kyoto the capital of Korea?",false,5));
         this.questions.add(new TrueFalse("Is Vancouver part of BC?",true,5));
-        quiz = new Quiz(questions);
+        quiz = new Quiz(questions, "Brian's quiz");
         test = new QuizAttempt(quiz);
     }
 

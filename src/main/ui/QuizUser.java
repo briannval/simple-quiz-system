@@ -1,19 +1,19 @@
 package ui;
 
 public abstract class QuizUser {
-    protected String name;
-    protected int year;
+    private String name;
+    private int year;
 
     public QuizUser(String name, int year) {
         this.name = name;
         this.year = year;
     }
 
-    public String getName() {
+    protected String getName() {
         return this.name;
     }
 
-    public int getYear() {
+    protected int getYear() {
         return this.year;
     }
 
