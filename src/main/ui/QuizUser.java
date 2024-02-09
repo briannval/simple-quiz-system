@@ -17,7 +17,7 @@ public abstract class QuizUser {
         return this.year;
     }
 
-    public abstract boolean begin();
+    public abstract void begin();
 
     public abstract void createReport();
 }

@@ -40,8 +40,9 @@ An example of text with **bold** and *italic* fonts.
 ## User Story
 
 - As a user, I want to be able to create a quiz.
-  Example of ADD X to Y, where X = questions, and Y = quiz. Users will be able to add X to Y in a sense that 
+  Example of ADD X to Y, where X = questions, and Y = quiz. Users will be able to add X to Y in a sense. 
 - As a user, I want to be able to attempt another user's quiz.
+  View all the X in Y.
 - As a user, I want to be able to get feedback on my attempt.
 - As a user, I want to be able to star another user's quiz.
 - As a user, I want to be able to create multiple choice questions.

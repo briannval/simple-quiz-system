@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,11 +15,7 @@ public class MultipleChoiceTest {
 
     @BeforeEach
     public void setup() {
-        this.choices = new ArrayList<>();
-        this.choices.add("Java");
-        this.choices.add("Python");
-        this.choices.add("Assembly");
-        this.choices.add("C#");
+        this.choices = new ArrayList<>(Arrays.asList("Java","Python","Assembly","C#"));
         problem = new MultipleChoice('C',"Which one is low-level language?",5,this.choices);
     }
 

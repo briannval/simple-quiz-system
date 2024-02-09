@@ -11,8 +11,7 @@ public class QuizStarter extends QuizUser {
     }
 
     @Override
-    public boolean begin() {
-        return false;
+    public void begin() {
     }
 
     @Override

@@ -11,12 +11,20 @@ public class QuizAttempt {
         this.status = "ongoing";
     }
 
+    public <T> void attemptQuestion(int index, T answer) {
+        Question currentQuestion = this.currentQuiz.getOneQuestion(index);
+        boolean result = this.currentQuiz.doQuestion(currentQuestion,answer);
+        if (result) {
+            currentPoints += currentQuestion.getPoints();
+        }
+    }
+
     public int calculatePercentage() {
-        return ((this.currentPoints / this.currentQuiz.getMaxPoints()) * 100);
+        return (getCurrentPoints() * 100) / this.currentQuiz.getMaxPoints();
     }
 
     public boolean determinePass() {
-        return (calculatePercentage() >= 0.7);
+        return (calculatePercentage() >= 70);
     }
 
     public String generateReport() {
@@ -32,5 +40,15 @@ public class QuizAttempt {
         }
     }
 
+    public int getCurrentPoints() {
+        return this.currentPoints;
+    }
 
+    public Quiz getCurrentQuiz() {
+        return this.currentQuiz;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
 }
