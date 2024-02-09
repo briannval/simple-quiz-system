@@ -1,6 +1,5 @@
 package model;
 
-import model.MultipleChoice;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -12,12 +11,16 @@ import static org.junit.jupiter.api.Assertions.*;
 // Test methods for the MultipleChoice class
 public class MultipleChoiceTest {
     MultipleChoice problem;
+    MultipleChoice secondProblem;
     List<String> choices;
+    List<String> secondChoices;
 
     @BeforeEach
     public void setup() {
         this.choices = new ArrayList<>(Arrays.asList("Java","Python","Assembly","C#"));
-        problem = new MultipleChoice('C',"Which one is low-level language?",5,this.choices);
+        this.problem = new MultipleChoice('C',"Which one is low-level language?",5,this.choices);
+        this.secondChoices = new ArrayList<>(Arrays.asList("abc","def","ghi","jkl"));
+        this.secondProblem = new MultipleChoice('A', "What are the first three letters?", 5, this.secondChoices);
     }
 
     @Test
@@ -28,6 +31,11 @@ public class MultipleChoiceTest {
         assertEquals(choices,problem.getChoices());
         assertFalse(problem.getCompleted());
         assertEquals("Multiple Choice",problem.getFormat());
+        assertEquals("What are the first three letters?", secondProblem.getQuestion());
+        assertEquals('A', secondProblem.getCorrectAnswer());
+        assertEquals(5, secondProblem.getPoints());
+        assertEquals(secondChoices, secondProblem.getChoices());
+        assertFalse(secondProblem.getCompleted());
     }
 
     @Test
@@ -41,6 +49,8 @@ public class MultipleChoiceTest {
     @Test
     public void testGetCorrectChoice() {
         assertEquals(this.choices.get(2),problem.getCorrectChoice());
+        assertEquals("Assembly",problem.getCorrectChoice());
+        assertEquals("abc",secondProblem.getCorrectChoice());
     }
 
     @Test
@@ -49,6 +59,10 @@ public class MultipleChoiceTest {
         assertFalse(problem.checkAnswer('B'));
         assertFalse(problem.checkAnswer('D'));
         assertTrue(problem.checkAnswer('C'));
+        assertTrue(secondProblem.checkAnswer('A'));
+        assertFalse(secondProblem.checkAnswer('B'));
+        assertFalse(secondProblem.checkAnswer('C'));
+        assertFalse(secondProblem.checkAnswer('D'));
     }
 }
 

@@ -36,7 +36,6 @@ public class QuizAttemptTest {
     public void testConstructor() {
         assertEquals(0,test.getCurrentPoints());
         assertEquals(quiz,test.getCurrentQuiz());
-        assertEquals("ongoing",test.getStatus());
         assertEquals(0,test.calculatePercentage());
     }
 
@@ -83,7 +82,7 @@ public class QuizAttemptTest {
     }
 
     @Test
-    public void generateReportWithFail() {
+    public void testGenerateReportWithFail() {
         test.attemptQuestion(0,'A');
         test.attemptQuestion(1,80);
         test.attemptQuestion(2,2);
@@ -93,12 +92,28 @@ public class QuizAttemptTest {
     }
 
     @Test
-    public void generateReportWithPass() {
+    public void testGenerateReportWithPass() {
         test.attemptQuestion(0,'A');
         test.attemptQuestion(1,85);
         test.attemptQuestion(2,1);
         test.attemptQuestion(3,false);
         test.attemptQuestion(4,false);
         assertEquals("Congratulations! You have passed with a score of 83",test.generateReport());
+    }
+
+    @Test
+    public void testWillStarOnce() {
+        test.willStar(true);
+        assertEquals(1, test.getCurrentQuiz().getStars());
+        test.willStar(false);
+        assertEquals(1, test.getCurrentQuiz().getStars());
+    }
+
+    @Test
+    public void testWillStarMultipleTimes() {
+        test.willStar(true);
+        test.willStar(true);
+        test.willStar(true);
+        assertEquals(3, test.getCurrentQuiz().getStars());
     }
 }

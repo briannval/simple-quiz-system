@@ -23,16 +23,6 @@ public class NumericalTest {
     }
 
     @Test
-    public void testSetHint() {
-        problem.setHint("Remember the multiplication table!");
-        assertEquals("Remember the multiplication table!",problem.getHint());
-        problem.setHint("What does times two mean?");
-        assertEquals("What does times two mean?", problem.getHint());
-        problem.setHint("You're doing great!");
-        assertEquals("You're doing great!", problem.getHint());
-    }
-
-    @Test
     public void testSetCompleted() {
         problem.setCompleted(true);
         assertTrue(problem.getCompleted());

@@ -7,7 +7,6 @@ public class Numerical implements Question<Integer> {
     private final int correctAnswer;
     private final String format;
     private String question;
-    private String hint;
     private int points;
     private boolean completed;
 
@@ -16,7 +15,6 @@ public class Numerical implements Question<Integer> {
         this.format = "Numerical";
         this.question = question;
         this.points = points;
-        this.hint = "";
         this.completed = false;
     }
 
@@ -38,14 +36,6 @@ public class Numerical implements Question<Integer> {
     @Override
     public void setQuestion(String question) {
         this.question = question;
-    }
-
-    /*
-     * MODIFIES: this
-     * EFFECTS: sets the hint for the problem
-     */
-    public void setHint(String hint) {
-        this.hint = hint;
     }
 
     @Override
@@ -76,10 +66,6 @@ public class Numerical implements Question<Integer> {
     @Override
     public List<String> getChoices() {
         return null;
-    }
-
-    public String getHint() {
-        return this.hint;
     }
 
     public int getCorrectAnswer() {

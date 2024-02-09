@@ -3,12 +3,10 @@ package model;
 public class QuizAttempt {
     private Quiz currentQuiz;
     private int currentPoints;
-    private String status; // "passed", "failed", or "ongoing"
 
     public QuizAttempt(Quiz currentQuiz) {
         this.currentQuiz = currentQuiz;
         this.currentPoints = 0;
-        this.status = "ongoing";
     }
 
     public <T> void attemptQuestion(int index, T answer) {
@@ -46,9 +44,5 @@ public class QuizAttempt {
 
     public Quiz getCurrentQuiz() {
         return this.currentQuiz;
-    }
-
-    public String getStatus() {
-        return this.status;
     }
 }
