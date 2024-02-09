@@ -7,10 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 // Test methods for the Numerical class
 public class NumericalTest {
     private Numerical problem;
+    private Numerical secondProblem;
 
     @BeforeEach
     public void setup() {
         problem = new Numerical(84,"What is 42 times two", 5);
+        secondProblem = new Numerical(2, "What is 1+1?", 5);
     }
 
     @Test
@@ -20,6 +22,10 @@ public class NumericalTest {
         assertEquals(5, problem.getPoints());
         assertFalse(problem.getCompleted());
         assertEquals("Numerical",problem.getFormat());
+        assertEquals(2, secondProblem.getCorrectAnswer());
+        assertEquals("What is 1+1?", secondProblem.getQuestion());
+        assertEquals(5, secondProblem.getPoints());
+        assertFalse(problem.getCompleted());
     }
 
     @Test
@@ -28,6 +34,10 @@ public class NumericalTest {
         assertTrue(problem.getCompleted());
         problem.setCompleted(false);
         assertFalse(problem.getCompleted());
+        secondProblem.setCompleted(true);
+        assertTrue(secondProblem.getCompleted());
+        secondProblem.setCompleted(false);
+        assertFalse(secondProblem.getCompleted());
     }
 
     @Test

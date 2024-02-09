@@ -92,6 +92,16 @@ public class QuizAttemptTest {
     }
 
     @Test
+    public void testGenerateReportAllWrong() {
+        test.attemptQuestion(0,'B');
+        test.attemptQuestion(1,80);
+        test.attemptQuestion(2,2);
+        test.attemptQuestion(3,true);
+        test.attemptQuestion(4,false);
+        assertEquals("Try harder next time! Your score is 0",test.generateReport());
+    }
+
+    @Test
     public void testGenerateReportWithPass() {
         test.attemptQuestion(0,'A');
         test.attemptQuestion(1,85);
@@ -99,6 +109,16 @@ public class QuizAttemptTest {
         test.attemptQuestion(3,false);
         test.attemptQuestion(4,false);
         assertEquals("Congratulations! You have passed with a score of 83",test.generateReport());
+    }
+
+    @Test
+    public void testGenerateReportFullMarks() {
+        test.attemptQuestion(0,'A');
+        test.attemptQuestion(1,85);
+        test.attemptQuestion(2,1);
+        test.attemptQuestion(3,false);
+        test.attemptQuestion(4,true);
+        assertEquals("Congratulations! You have passed with a score of 100",test.generateReport());
     }
 
     @Test
