@@ -6,12 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// Represents the user interface for creating a quiz
 public class QuizCreator extends QuizUser {
     QuizMaker maker;
     String quizName;
     int numProblems;
     Scanner scanner = new Scanner(System.in);
 
+    /*
+     * REQUIRES: name must be of a non-zero length
+     *           year must be from 1-4 (UBC year)
+     *           quizName must be of a non-zero length
+     *           numProblems must be >= 1
+     * EFFECTS: creates a new quiz creator interface that would help users
+     *          to create a quiz
+     */
     public QuizCreator(String name, int year, String quizName, int numProblems) {
         super(name, year);
         this.quizName = quizName;
@@ -19,6 +28,12 @@ public class QuizCreator extends QuizUser {
         maker = new QuizMaker(quizName, numProblems);
     }
 
+    /*
+     * REQUIRES: c must be of type char
+     * EFFECTS: converts the character t to boolean true,
+     *          and character f to boolean false,
+     *          used in creating boolean questions
+     */
     public boolean charToBool(char c) {
         if (c == 't') {
             return true;
@@ -26,6 +41,13 @@ public class QuizCreator extends QuizUser {
         return false;
     }
 
+    /*
+     * REQUIRES: user input of question statement must be non-zero length
+     *           user input of correctAnswer must be either t or f
+     *           user input of points must be >= 1
+     * MODIFIES: this
+     * EFFECTS: adds a new True False question to the Quiz Maker class
+     */
     public void createTrueFalse() {
         String question;
         int points;
@@ -39,6 +61,13 @@ public class QuizCreator extends QuizUser {
         maker.addTrueFalseQuestion(question, charToBool(correctAnswer), points);
     }
 
+    /*
+     * REQUIRES: user input of question statement must be non-zero length
+     *           user input of correctAnswer must be an integer
+     *           user input of points must be >= 1
+     * MODIFIES: this
+     * EFFECTS: adds a Numerical question to the Quiz Maker class
+     */
     public void createNumerical() {
         String question;
         int points;
@@ -52,6 +81,14 @@ public class QuizCreator extends QuizUser {
         maker.addNumericalQuestion(correctAnswer, question, points);
     }
 
+    /*
+     * REQUIRES: user input of question statement must be non-zero length
+     *           user input of correctAnswer must be a character
+     *           user input of points must be >= 1
+     * MODIFIES: this
+     * EFFECTS: adds a Multiple Choice question to the Quiz Maker class
+     *
+     */
     public void createMultipleChoice() {
         List<String> choices = new ArrayList<>();
         String question;
@@ -74,6 +111,10 @@ public class QuizCreator extends QuizUser {
         maker.addMultipleChoiceQuestion(correctAnswer, question, points, choices);
     }
 
+    /*
+     * REQUIRES: user input must be in the range specified
+     * EFFECTS: prompts the user to a choice for  action
+     */
     public int prompt() {
         System.out.println("What format of question do you want?");
         System.out.println("1. Multiple Choice");
@@ -82,10 +123,19 @@ public class QuizCreator extends QuizUser {
         return scanner.nextInt();
     }
 
+    /*
+     * REQUIRES: all the questions must be added already
+     * EFFECTS: creates a quiz from all the questions specified
+     */
     public Quiz createQuiz() {
         return maker.quizGenerator();
     }
 
+    /*
+     * REQUIRES: users select 1-3 for different problem formats
+     * EFFECTS: creates questions of different formats for the format
+     *          specified by the user
+     */
     @Override
     public void begin() {
         System.out.println("Let's start creating your quiz!");
@@ -108,6 +158,9 @@ public class QuizCreator extends QuizUser {
         }
     }
 
+    /*
+     * EFFECTS: concludes the quiz creating process
+     */
     @Override
     public void createReport() {
         System.out.println("You have successfully created your quiz!");

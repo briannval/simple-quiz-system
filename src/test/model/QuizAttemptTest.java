@@ -123,17 +123,15 @@ public class QuizAttemptTest {
 
     @Test
     public void testWillStarOnce() {
-        test.willStar(true);
-        assertEquals(1, test.getCurrentQuiz().getStars());
-        test.willStar(false);
+        test.willStar();
         assertEquals(1, test.getCurrentQuiz().getStars());
     }
 
     @Test
     public void testWillStarMultipleTimes() {
-        test.willStar(true);
-        test.willStar(true);
-        test.willStar(true);
+        test.willStar();
+        test.willStar();
+        test.willStar();
         assertEquals(3, test.getCurrentQuiz().getStars());
     }
 }

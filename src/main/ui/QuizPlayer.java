@@ -5,38 +5,60 @@ import java.util.Scanner;
 import java.util.List;
 import model.Quiz;
 
+// Represents the whole quiz system with user info
 public class QuizPlayer extends QuizUser {
     private final List<Quiz> quizBank;
     QuizStarter starter;
     QuizCreator creator;
     Scanner scanner = new Scanner(System.in);
 
+    /*
+     * REQUIRES: name must be of non-zero length
+     *           year must be from 1-4 (UBC year)
+     * EFFECTS: initializes a new user quiz interface
+     *          with a quiz bank
+     */
     public QuizPlayer(String name, int year) {
         super(name, year);
         quizBank = new ArrayList<>();
     }
 
+    /*
+     * EFFECTS: displays all of the quizzes currently inside the quiz bank
+     */
     public void displayQuizNames() {
         for (int i = 0; i < quizBank.size(); i++) {
             System.out.println(String.valueOf(i + 1) + " " + quizBank.get(i).getName());
+            System.out.println("STARS: " + quizBank.get(i).getStars());
         }
-        System.out.println("You may choose a number from 1 to " + String.valueOf(quizBank.size()));
-
+        System.out.println("Choose the number of quiz you would like to try");
     }
 
+    /*
+     * EFFECTS: prints all actions users can do inside the interface
+     */
     public void printChoices() {
         System.out.println("What would you like to do?");
         System.out.println("1. Create a quiz");
         System.out.println("2. Attempt a quiz");
         System.out.println("3. Exit");
-        System.out.print("Choose 1 or 2: ");
+        System.out.print("Choose 1, 2, or 3: ");
     }
 
+    /*
+     * REQUIRES: users to press enter to go next
+     * EFFECTS: prompts the user to press enter before continuing next action
+     */
     public void pressEnter() {
         System.out.println("Press enter to continue...");
         scanner.nextLine();
     }
 
+    /*
+     * REQUIRES: user's quiz name must be of a non-zero length
+     *           number of questions must be >= 1
+     * EFFECTS: handler for the Quiz Creator class to create a quiz
+     */
     public void handleCreateQuiz() {
         System.out.println("What will your quiz name be?");
         String quizName = scanner.nextLine();
@@ -49,6 +71,10 @@ public class QuizPlayer extends QuizUser {
         quizBank.add(creator.createQuiz());
     }
 
+    /*
+     * REQUIRES: user's choice must be a valid index of the list of quizzes
+     * EFFECTS: handler for the Quiz Starter class to start a quiz
+     */
     public void handleAttemptQuiz() {
         displayQuizNames();
         int quizChoice = scanner.nextInt();
@@ -58,6 +84,9 @@ public class QuizPlayer extends QuizUser {
         pressEnter();
     }
 
+    /*
+     * EFFECTS: handles the user's interaction on what action to take during runtime
+     */
     @Override
     public void begin() {
         while (true) {
@@ -78,6 +107,9 @@ public class QuizPlayer extends QuizUser {
         }
     }
 
+    /*
+     * EFFECTS: gets the user's name and input onto a string
+     */
     @Override
     public void createReport() {
         System.out.println("Your name is " + super.getName() + " and your year is " + String.valueOf(super.getYear()));

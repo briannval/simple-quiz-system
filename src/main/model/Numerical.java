@@ -10,6 +10,12 @@ public class Numerical implements Question<Integer> {
     private int points;
     private boolean completed;
 
+    /*
+     * REQUIRES: correctAnswer must be an integer
+     *           question must be a valid question, of non-zero length
+     *           points is greater than 0
+     * EFFECTS: constructs a numerical question with different types of
+     */
     public Numerical(int correctAnswer, String question, int points) {
         this.correctAnswer = correctAnswer;
         this.format = "Numerical";

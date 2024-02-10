@@ -2,8 +2,9 @@ package model;
 
 import java.util.List;
 
-// Represents a question being able to output question
-// and check answer
+// Represents an interface for question being able to output question
+// and check answer with different inputs
+// includes commonly used getters and setters
 public interface Question<T> {
     String getQuestion();
 

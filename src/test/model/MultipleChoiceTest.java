@@ -36,6 +36,7 @@ public class MultipleChoiceTest {
         assertEquals(5, secondProblem.getPoints());
         assertEquals(secondChoices, secondProblem.getChoices());
         assertFalse(secondProblem.getCompleted());
+        assertEquals("Multiple Choice",problem.getFormat());
     }
 
     @Test
@@ -50,6 +51,7 @@ public class MultipleChoiceTest {
     public void testGetCorrectChoice() {
         assertEquals(this.choices.get(2),problem.getCorrectChoice());
         assertEquals("Assembly",problem.getCorrectChoice());
+        assertEquals(this.secondChoices.get(0),problem.getCorrectChoice());
         assertEquals("abc",secondProblem.getCorrectChoice());
     }
 
