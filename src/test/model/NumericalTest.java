@@ -48,4 +48,52 @@ public class NumericalTest {
         assertFalse(problem.checkAnswer(1));
         assertFalse(problem.checkAnswer(99));
     }
+
+    @Test
+    public void testSetQuestionOnce() {
+        problem.setQuestion("I am setting this question once");
+        assertEquals("I am setting this question once", problem.getQuestion());
+    }
+
+    @Test
+    public void testSetQuestionMultipleTimes() {
+        problem.setQuestion("I am setting this question once");
+        assertEquals("I am setting this question once", problem.getQuestion());
+        problem.setQuestion("I am setting this question twice");
+        assertEquals("I am setting this question twice", problem.getQuestion());
+        problem.setQuestion("I am setting this question thrice");
+        assertEquals("I am setting this question thrice", problem.getQuestion());
+    }
+
+    @Test
+    public void testSetPointsOnce() {
+        problem.setPoints(20);
+        assertEquals(20,problem.getPoints());
+    }
+
+    @Test
+    public void testSetPointsMultipleTimes() {
+        problem.setPoints(20);
+        assertEquals(20,problem.getPoints());
+        problem.setPoints(30);
+        assertEquals(30,problem.getPoints());
+        problem.setPoints(40);
+        assertEquals(40,problem.getPoints());
+    }
+
+    @Test
+    public void testGetChoicesOnce() {
+        assertNull(problem.getChoices());
+        assertNull(secondProblem.getChoices());
+    }
+
+    @Test
+    public void testGetChoicesMultipleTimes() {
+        assertNull(problem.getChoices());
+        assertNull(secondProblem.getChoices());
+        assertNull(problem.getChoices());
+        assertNull(secondProblem.getChoices());
+        assertNull(problem.getChoices());
+        assertNull(secondProblem.getChoices());
+    }
 }

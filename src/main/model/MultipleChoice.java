@@ -86,22 +86,4 @@ public class MultipleChoice implements Question<Character> {
     public List<String> getChoices() {
         return this.choices;
     }
-
-    /*
-     * EFFECTS: returns the correct choice
-     */
-
-    public String getCorrectChoice() {
-        switch (this.correctAnswer) {
-            case 'A':
-                return this.choices.get(0);
-            case 'B':
-                return this.choices.get(1);
-            case 'C':
-                return this.choices.get(2);
-            case 'D':
-                return this.choices.get(3);
-        }
-        return "";
-    }
 }

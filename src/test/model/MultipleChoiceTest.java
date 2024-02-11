@@ -48,14 +48,6 @@ public class MultipleChoiceTest {
     }
 
     @Test
-    public void testGetCorrectChoice() {
-        assertEquals(this.choices.get(2),problem.getCorrectChoice());
-        assertEquals("Assembly",problem.getCorrectChoice());
-        assertEquals(this.secondChoices.get(0),problem.getCorrectChoice());
-        assertEquals("abc",secondProblem.getCorrectChoice());
-    }
-
-    @Test
     public void testCheckAnswer() {
         assertFalse(problem.checkAnswer('A'));
         assertFalse(problem.checkAnswer('B'));
@@ -65,6 +57,44 @@ public class MultipleChoiceTest {
         assertFalse(secondProblem.checkAnswer('B'));
         assertFalse(secondProblem.checkAnswer('C'));
         assertFalse(secondProblem.checkAnswer('D'));
+    }
+
+    @Test
+    public void testSetQuestionOnce() {
+        problem.setQuestion("I am setting this question once");
+        assertEquals("I am setting this question once", problem.getQuestion());
+    }
+
+    @Test
+    public void testSetQuestionMultipleTimes() {
+        problem.setQuestion("I am setting this question once");
+        assertEquals("I am setting this question once", problem.getQuestion());
+        problem.setQuestion("I am setting this question twice");
+        assertEquals("I am setting this question twice", problem.getQuestion());
+        problem.setQuestion("I am setting this question thrice");
+        assertEquals("I am setting this question thrice", problem.getQuestion());
+    }
+
+    @Test
+    public void testSetPointsOnce() {
+        problem.setPoints(20);
+        assertEquals(20,problem.getPoints());
+    }
+
+    @Test
+    public void testSetPointsMultipleTimes() {
+        problem.setPoints(20);
+        assertEquals(20,problem.getPoints());
+        problem.setPoints(30);
+        assertEquals(30,problem.getPoints());
+        problem.setPoints(40);
+        assertEquals(40,problem.getPoints());
+    }
+
+    @Test
+    public void testGetChoices() {
+        assertEquals(this.choices, problem.getChoices());
+        assertEquals(this.secondChoices, secondProblem.getChoices());
     }
 }
 

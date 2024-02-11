@@ -68,7 +68,6 @@ public class Numerical implements Question<Integer> {
         return this.correctAnswer == answer;
     }
 
-    // Invalid for this particular class
     @Override
     public List<String> getChoices() {
         return null;

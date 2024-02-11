@@ -59,5 +59,50 @@ public class TrueFalseTest {
         assertEquals("This statement is correct because strong type checking and exception handling",
                 secondProblem.getAnswerStatement());
     }
+    @Test
+    public void testSetQuestionOnce() {
+        firstProblem.setQuestion("I am setting this question once");
+        assertEquals("I am setting this question once", firstProblem.getQuestion());
+    }
 
+    @Test
+    public void testSetQuestionMultipleTimes() {
+        firstProblem.setQuestion("I am setting this question once");
+        assertEquals("I am setting this question once", firstProblem.getQuestion());
+        firstProblem.setQuestion("I am setting this question twice");
+        assertEquals("I am setting this question twice", firstProblem.getQuestion());
+        firstProblem.setQuestion("I am setting this question thrice");
+        assertEquals("I am setting this question thrice", firstProblem.getQuestion());
+    }
+
+    @Test
+    public void testSetPointsOnce() {
+        secondProblem.setPoints(20);
+        assertEquals(20,secondProblem.getPoints());
+    }
+
+    @Test
+    public void testSetPointsMultipleTimes() {
+        secondProblem.setPoints(20);
+        assertEquals(20,secondProblem.getPoints());
+        secondProblem.setPoints(30);
+        assertEquals(30,secondProblem.getPoints());
+        secondProblem.setPoints(40);
+        assertEquals(40,secondProblem.getPoints());
+    }
+    @Test
+    public void testGetChoicesOnce() {
+        assertNull(firstProblem.getChoices());
+        assertNull(secondProblem.getChoices());
+    }
+
+    @Test
+    public void testGetChoicesMultipleTimes() {
+        assertNull(firstProblem.getChoices());
+        assertNull(secondProblem.getChoices());
+        assertNull(firstProblem.getChoices());
+        assertNull(secondProblem.getChoices());
+        assertNull(firstProblem.getChoices());
+        assertNull(secondProblem.getChoices());
+    }
 }

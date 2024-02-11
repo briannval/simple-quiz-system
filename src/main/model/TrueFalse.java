@@ -74,7 +74,7 @@ public class TrueFalse implements Question<Boolean> {
 
     @Override
     public List<String> getChoices() {
-        return new ArrayList<>(Arrays.asList("True", "False"));
+        return null;
     }
 
     public void setExplanation(String explanation) {
