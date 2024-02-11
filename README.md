@@ -39,6 +39,7 @@ An example of text with **bold** and *italic* fonts.
 
 ## User Story
 
+X and Y requirement
 X = question
 Y = quiz
 - As a user, I want to be able to create a quiz.
@@ -46,7 +47,9 @@ Y = quiz
 - As a user, I want to be able to attempt another user's quiz.
   Example of LIST all the X in Y
 - As a user, I want to be able to get feedback on my attempt.
+- As a user, I want to see all the quizzes that I have created.
 - As a user, I want to be able to create questions. 
+- As a user, I want to be able to star a quiz I have just attempted
 
 
 
