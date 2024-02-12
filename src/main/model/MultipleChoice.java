@@ -82,7 +82,6 @@ public class MultipleChoice implements Question<Character> {
         return this.format;
     }
 
-    @Override
     public List<String> getChoices() {
         return this.choices;
     }

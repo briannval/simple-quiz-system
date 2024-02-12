@@ -14,14 +14,13 @@ confusions on Piazza. Think about it, what if there was a way to make Piazza, bu
 
 ## Overview
 
-**"There is no better way to learn than to teach"** -Robert Oppenheimer \
+**"There is no better way to learn than to teach"** -Robert Oppenheimer
 ... or than to *test*.
 This online quiz system will allow students to make custom quizzes based on the material which will be for other students
 to practise. Other students will be able to go through these quizzes under exam settings. By creating quizzes like this, it is
 guaranteed to enforce student learning, because a higher level of understanding is required to create well-worded problems, and
 be prepared to explain the solutions later on. This will create greater levels of insight for all other students as well, and hopefully,
 just hopefully, ...increase the *average* for many classes.
-
 
 
 ## Goal
@@ -42,14 +41,14 @@ An example of text with **bold** and *italic* fonts.
 X and Y requirement
 X = question
 Y = quiz
-- As a user, I want to be able to create a quiz.
-  Example of ADD multiple X to Y, where X = questions, and Y = quiz. Users will be able to add X to Y in a sense. 
-- As a user, I want to be able to attempt another user's quiz.
-  Example of LIST all the X in Y
-- As a user, I want to be able to get feedback on my attempt.
-- As a user, I want to see all the quizzes that I have created.
-- As a user, I want to be able to create questions. 
-- As a user, I want to be able to star a quiz I have just attempted
+- As a user, I want to be able to create a quiz. (IMPLEMENTED)
+  Example of ADD multiple X to Y, where X = questions, and Y = quiz. Users will be able to add multiple questions. 
+- As a user, I want to be able to attempt another user's quiz. (IMPLEMENTED)
+  Example of LIST all the X in Y, where X = questions, and Y = quiz. Users will be able to see all the questions.
+- As a user, I want to be able to get feedback on my attempt. (IMPLEMENTED)
+- As a user, I want to see all the quizzes that are available to try (IMPLEMENTED)
+- As a user, I want to be able to star a quiz I have just attempted (IMPLEMENTED)
+- As a user, I want to be able to create questions. (IMPLEMENTED)
 
 
 

@@ -3,6 +3,7 @@ package ui;
 import model.Quiz;
 import model.QuizAttempt;
 import model.Question;
+import model.MultipleChoice;
 
 import java.util.Scanner;
 import java.util.List;
@@ -87,7 +88,8 @@ public class QuizStarter extends QuizUser {
             System.out.println(question.getQuestion());
             switch (question.getFormat()) {
                 case "Multiple Choice":
-                    attempt.attemptQuestion(i, getMultipleChoiceAnswer(question.getChoices()));
+                    MultipleChoice specificQuestion = (MultipleChoice) question;
+                    attempt.attemptQuestion(i, getMultipleChoiceAnswer(specificQuestion.getChoices()));
                     break;
                 case "Numerical":
                     attempt.attemptQuestion(i, getNumericalAnswer());

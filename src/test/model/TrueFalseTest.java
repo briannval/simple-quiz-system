@@ -90,19 +90,4 @@ public class TrueFalseTest {
         secondProblem.setPoints(40);
         assertEquals(40,secondProblem.getPoints());
     }
-    @Test
-    public void testGetChoicesOnce() {
-        assertNull(firstProblem.getChoices());
-        assertNull(secondProblem.getChoices());
-    }
-
-    @Test
-    public void testGetChoicesMultipleTimes() {
-        assertNull(firstProblem.getChoices());
-        assertNull(secondProblem.getChoices());
-        assertNull(firstProblem.getChoices());
-        assertNull(secondProblem.getChoices());
-        assertNull(firstProblem.getChoices());
-        assertNull(secondProblem.getChoices());
-    }
 }

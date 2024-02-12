@@ -80,20 +80,4 @@ public class NumericalTest {
         problem.setPoints(40);
         assertEquals(40,problem.getPoints());
     }
-
-    @Test
-    public void testGetChoicesOnce() {
-        assertNull(problem.getChoices());
-        assertNull(secondProblem.getChoices());
-    }
-
-    @Test
-    public void testGetChoicesMultipleTimes() {
-        assertNull(problem.getChoices());
-        assertNull(secondProblem.getChoices());
-        assertNull(problem.getChoices());
-        assertNull(secondProblem.getChoices());
-        assertNull(problem.getChoices());
-        assertNull(secondProblem.getChoices());
-    }
 }

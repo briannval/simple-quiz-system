@@ -1,9 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /*
  * Represents a true false problem
  * There can only be two answers, two or false
@@ -70,11 +66,6 @@ public class TrueFalse implements Question<Boolean> {
             return !answer;
         }
         return answer;
-    }
-
-    @Override
-    public List<String> getChoices() {
-        return null;
     }
 
     public void setExplanation(String explanation) {
