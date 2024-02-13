@@ -2,7 +2,7 @@ package model;
 
 // Represents a single attempt of a quiz
 public class QuizAttempt {
-    private Quiz currentQuiz;
+    private final Quiz currentQuiz;
     private int currentPoints;
 
     /*
@@ -32,7 +32,7 @@ public class QuizAttempt {
     /*
      * REQUIRES: all questions in the quiz must be completed
      * EFFECTS: calculates the percentage score earned based on current points
-     *          and the maximum points earnable of the quiz
+     *          and the maximum points that can be earned of the quiz
      */
     public int calculatePercentage() {
         return (getCurrentPoints() * 100) / this.currentQuiz.getMaxPoints();
@@ -47,13 +47,13 @@ public class QuizAttempt {
 
     /*
      * EFFECTS: generates a short report in according to the score obtained
-     *          and whether or not the user passed
+     *          and whether the user passed
      */
     public String generateReport() {
         if (determinePass()) {
-            return "Congratulations! You have passed with a score of " + String.valueOf(calculatePercentage());
+            return "Congratulations! You have passed with a score of " + calculatePercentage();
         }
-        return "Try harder next time! Your score is " + String.valueOf(calculatePercentage());
+        return "Try harder next time! Your score is " + calculatePercentage();
     }
 
     /*

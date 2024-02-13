@@ -5,9 +5,9 @@ import java.util.List;
 
 // Represents a quiz maker class with different types of questions
 public class QuizMaker {
-    private String name;
-    private List<Question> questions;
-    private int numQuestion;
+    private final String name;
+    private final List<Question> questions;
+    private final int numQuestion;
 
     /*
      * REQUIRES: quiz name has to be non-zero length

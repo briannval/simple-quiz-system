@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class Quiz {
     private int stars;
-    private List<Question> questions;
+    private final List<Question> questions;
     private int maxPoints;
-    private String name;
+    private final String name;
 
     /*
      * REQUIRES: questions of varying format (or same, if preferable)
