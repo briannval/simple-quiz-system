@@ -19,4 +19,6 @@ public interface Question<T> {
     String getFormat();
 
     boolean checkAnswer(T answer);
+
+
 }
