@@ -1,5 +1,9 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writeable;
+
 import java.util.List;
 
 /*
@@ -7,7 +11,7 @@ import java.util.List;
  * The options are 'A','B','C', or 'D'
  * Only one of the options are correct
  */
-public class MultipleChoice implements Question<Character> {
+public class MultipleChoice implements Question<Character>, Writeable {
     private final char correctAnswer;
     private final String format;
     private String question;
@@ -84,5 +88,26 @@ public class MultipleChoice implements Question<Character> {
 
     public List<String> getChoices() {
         return this.choices;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("correctAnswer", this.correctAnswer);
+        json.put("format", this.format);
+        json.put("question", this.question);
+        json.put("points", String.valueOf(this.points));
+        json.put("choices", choicesToJson());
+        return json;
+    }
+
+    private JSONArray choicesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (String choice: this.choices) {
+            jsonArray.put(choice);
+        }
+
+        return jsonArray;
     }
 }

@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writeable;
+
 /*
  * Represents a true false problem
  * There can only be two answers, two or false
  */
-public class TrueFalse implements Question<Boolean> {
+public class TrueFalse implements Question<Boolean>, Writeable {
     private final boolean correctAnswer;  // either true or false
     private final String format;
     private String question;        // question string
@@ -91,5 +94,17 @@ public class TrueFalse implements Question<Boolean> {
 
     public boolean getCorrectAnswer() {
         return this.correctAnswer;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("correctAnswer", String.valueOf(this.correctAnswer));
+        json.put("format", this.format);
+        json.put("question", this.question);
+        json.put("points", String.valueOf(this.points));
+        json.put("completed", String.valueOf(this.completed));
+        json.put("explanation", this.explanation);
+        return null;
     }
 }
