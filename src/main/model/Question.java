@@ -1,9 +1,11 @@
 package model;
 
+import persistence.Writeable;
+
 // Represents an interface for question being able to output question
 // and check answer with different inputs
 // includes commonly used getters and setters
-public interface Question<T> {
+public interface Question<T> extends Writeable {
     String getQuestion();
 
     int getPoints();

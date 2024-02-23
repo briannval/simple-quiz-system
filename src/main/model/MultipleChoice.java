@@ -11,7 +11,7 @@ import java.util.List;
  * The options are 'A','B','C', or 'D'
  * Only one of the options are correct
  */
-public class MultipleChoice implements Question<Character>, Writeable {
+public class MultipleChoice implements Question<Character> {
     private final char correctAnswer;
     private final String format;
     private String question;
@@ -96,7 +96,7 @@ public class MultipleChoice implements Question<Character>, Writeable {
         json.put("correctAnswer", this.correctAnswer);
         json.put("format", this.format);
         json.put("question", this.question);
-        json.put("points", String.valueOf(this.points));
+        json.put("points", this.points);
         json.put("choices", choicesToJson());
         return json;
     }

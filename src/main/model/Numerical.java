@@ -4,7 +4,7 @@ import org.json.JSONObject;
 import persistence.Writeable;
 
 // Represents a numerical question with integer answer
-public class Numerical implements Question<Integer>, Writeable {
+public class Numerical implements Question<Integer> {
     private final int correctAnswer;
     private final String format;
     private String question;
@@ -76,10 +76,10 @@ public class Numerical implements Question<Integer>, Writeable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("correctAnswer", String.valueOf(correctAnswer));
+        json.put("correctAnswer", correctAnswer);
         json.put("format", this.format);
         json.put("question", this.question);
-        json.put("points", String.valueOf(this.points));
+        json.put("points", this.points);
         return json;
     }
 }

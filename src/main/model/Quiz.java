@@ -1,5 +1,9 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writeable;
+
 import java.util.List;
 
 /*
@@ -9,7 +13,7 @@ import java.util.List;
  * The class automatically calculates the total maximum points achievable
  * Starring will be done from the QuizAttempt class
  */
-public class Quiz {
+public class Quiz implements Writeable {
     private int stars;
     private final List<Question> questions;
     private int maxPoints;
@@ -73,5 +77,25 @@ public class Quiz {
      */
     public void starQuiz() {
         this.stars++;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("stars", this.stars);
+        json.put("questions", questionsToJson());
+        json.put("maxPoints", this.maxPoints);
+        json.put("name", this.name);
+        return null;
+    }
+
+    private JSONArray questionsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Question question: this.questions) {
+            jsonArray.put(question.toJson());
+        }
+
+        return jsonArray;
     }
 }
