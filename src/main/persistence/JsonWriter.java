@@ -1,5 +1,6 @@
 package persistence;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -22,11 +23,8 @@ public class JsonWriter {
         writer.close();
     }
 
-    public void saveToFile(JSONObject json) {
-        writer.print(json.toString(4));
-    }
-
-    public void flushStream() {
-        writer.flush();
+    public void saveToFile(JSONArray json) {
+        System.out.println(json);
+        writer.print(json);
     }
 }

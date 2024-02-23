@@ -50,6 +50,8 @@ public class Quiz implements Writeable {
      * MODIFIES: this
      * EFFECTS: checks the answer of a particular question and sets it to completed
      */
+    // Referenced from the Generics demo from Oracle Website
+    // https://docs.oracle.com/javase/tutorial/java/generics/methods.html
     public <T> boolean doQuestion(Question<T> question, T answer) {
         question.setCompleted(true);
         return question.checkAnswer(answer);
@@ -86,7 +88,7 @@ public class Quiz implements Writeable {
         json.put("questions", questionsToJson());
         json.put("maxPoints", this.maxPoints);
         json.put("name", this.name);
-        return null;
+        return json;
     }
 
     private JSONArray questionsToJson() {

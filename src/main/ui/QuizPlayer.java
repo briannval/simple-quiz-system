@@ -4,10 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 import model.Quiz;
+import org.json.JSONArray;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+import java.io.FileNotFoundException;
 
 // Represents the whole quiz system with user info
 public class QuizPlayer extends QuizUser {
+    private static final String FILE_URL = "./data/quizzes.json";
     private final List<Quiz> quizBank;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
     QuizStarter starter;
     QuizCreator creator;
     Scanner scanner = new Scanner(System.in);
@@ -21,6 +28,28 @@ public class QuizPlayer extends QuizUser {
     public QuizPlayer(String name, int year) {
         super(name, year);
         quizBank = new ArrayList<>();
+        jsonWriter = new JsonWriter(FILE_URL);
+    }
+
+    public void saveQuizzes() {
+        try {
+            jsonWriter.openFile();
+            jsonWriter.saveToFile(quizzesToJson());
+            jsonWriter.closeFile();
+            System.out.println("Saved all the quizzes to " + FILE_URL);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + FILE_URL);
+        }
+    }
+
+    public JSONArray quizzesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Quiz quiz: quizBank) {
+            jsonArray.put(quiz.toJson());
+        }
+
+        return jsonArray;
     }
 
     /*
@@ -101,6 +130,7 @@ public class QuizPlayer extends QuizUser {
                     handleAttemptQuiz();
                     break;
                 case 3:
+                    saveQuizzes();
                     pressEnter();
                     System.exit(0);
             }
@@ -114,4 +144,5 @@ public class QuizPlayer extends QuizUser {
     public void createReport() {
         System.out.println("Your name is " + super.getName() + " and your year is " + String.valueOf(super.getYear()));
     }
+
 }

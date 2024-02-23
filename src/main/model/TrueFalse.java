@@ -105,6 +105,6 @@ public class TrueFalse implements Question<Boolean> {
         json.put("points", this.points);
         json.put("completed", this.completed);
         json.put("explanation", this.explanation);
-        return null;
+        return json;
     }
 }
