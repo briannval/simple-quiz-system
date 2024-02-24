@@ -1,7 +1,6 @@
 package model;
 
 import org.json.JSONObject;
-import persistence.Writeable;
 
 // Represents a numerical question with integer answer
 public class Numerical implements Question<Integer> {
@@ -67,10 +66,6 @@ public class Numerical implements Question<Integer> {
     @Override
     public boolean checkAnswer(Integer answer) {
         return this.correctAnswer == answer;
-    }
-
-    public int getCorrectAnswer() {
-        return this.correctAnswer;
     }
 
     @Override

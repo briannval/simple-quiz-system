@@ -17,12 +17,10 @@ public class NumericalTest {
 
     @Test
     public void testConstructor() {
-        assertEquals(84, problem.getCorrectAnswer());
         assertEquals("What is 42 times two", problem.getQuestion());
         assertEquals(5, problem.getPoints());
         assertFalse(problem.getCompleted());
         assertEquals("Numerical",problem.getFormat());
-        assertEquals(2, secondProblem.getCorrectAnswer());
         assertEquals("What is 1+1?", secondProblem.getQuestion());
         assertEquals(5, secondProblem.getPoints());
         assertFalse(problem.getCompleted());

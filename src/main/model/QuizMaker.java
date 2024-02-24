@@ -67,6 +67,6 @@ public class QuizMaker {
      * EFFECTS: generates a new quiz with the current question
      */
     public Quiz quizGenerator() {
-        return new Quiz(this.questions,this.name);
+        return new Quiz(0, this.questions,this.name);
     }
 }

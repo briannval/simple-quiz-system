@@ -1,9 +1,11 @@
 package ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
-import model.Quiz;
+
+import model.*;
 import org.json.JSONArray;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -12,9 +14,9 @@ import java.io.FileNotFoundException;
 // Represents the whole quiz system with user info
 public class QuizPlayer extends QuizUser {
     private static final String FILE_URL = "./data/quizzes.json";
-    private final List<Quiz> quizBank;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
+    private List<Quiz> quizBank;
     QuizStarter starter;
     QuizCreator creator;
     Scanner scanner = new Scanner(System.in);
@@ -29,6 +31,13 @@ public class QuizPlayer extends QuizUser {
         super(name, year);
         quizBank = new ArrayList<>();
         jsonWriter = new JsonWriter(FILE_URL);
+        jsonReader = new JsonReader(FILE_URL);
+        try {
+            quizBank = jsonReader.read();
+        } catch (IOException e) {
+            System.out.println("Error reading from " + FILE_URL);
+        }
+
     }
 
     public void saveQuizzes() {
@@ -53,24 +62,26 @@ public class QuizPlayer extends QuizUser {
     }
 
     /*
-     * EFFECTS: displays all of the quizzes currently inside the quiz bank
+     * EFFECTS: displays all the quizzes currently inside the quiz bank
      */
     public void displayQuizNames() {
         for (int i = 0; i < quizBank.size(); i++) {
-            System.out.println(String.valueOf(i + 1) + " " + quizBank.get(i).getName());
+            System.out.println((i + 1) + " " + quizBank.get(i).getName());
             System.out.println("STARS: " + quizBank.get(i).getStars());
         }
         System.out.println("Choose the number of quiz you would like to try");
+        System.out.println("or enter -1 to exit");
     }
 
     /*
      * EFFECTS: prints all actions users can do inside the interface
      */
     public void printChoices() {
+
         System.out.println("What would you like to do?");
         System.out.println("1. Create a quiz");
         System.out.println("2. Attempt a quiz");
-        System.out.println("3. Exit");
+        System.out.println("3. Save and exit");
         System.out.print("Choose 1, 2, or 3: ");
     }
 
@@ -107,10 +118,12 @@ public class QuizPlayer extends QuizUser {
     public void handleAttemptQuiz() {
         displayQuizNames();
         int quizChoice = scanner.nextInt();
-        starter = new QuizStarter(super.getName(), super.getYear(), quizBank.get(quizChoice - 1));
-        starter.begin();
-        starter.createReport();
-        pressEnter();
+        if (quizChoice != -1) {
+            starter = new QuizStarter(super.getName(), super.getYear(), quizBank.get(quizChoice - 1));
+            starter.begin();
+            starter.createReport();
+            pressEnter();
+        }
     }
 
     /*
@@ -142,7 +155,7 @@ public class QuizPlayer extends QuizUser {
      */
     @Override
     public void createReport() {
-        System.out.println("Your name is " + super.getName() + " and your year is " + String.valueOf(super.getYear()));
+        System.out.println("Your name is " + super.getName() + " and your year is " + (super.getYear()));
     }
 
 }

@@ -1,7 +1,6 @@
 package model;
 
 import org.json.JSONObject;
-import persistence.Writeable;
 
 /*
  * Represents a true false problem
@@ -90,10 +89,6 @@ public class TrueFalse implements Question<Boolean> {
             return "This statement is incorrect because " + this.getExplanation();
         }
         return "This statement is correct because " + this.getExplanation();
-    }
-
-    public boolean getCorrectAnswer() {
-        return this.correctAnswer;
     }
 
     @Override

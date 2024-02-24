@@ -2,7 +2,6 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import persistence.Writeable;
 
 import java.util.List;
 
@@ -40,10 +39,6 @@ public class MultipleChoice implements Question<Character> {
     @Override
     public String getQuestion() {
         return this.question;
-    }
-
-    public char getCorrectAnswer() {
-        return this.correctAnswer;
     }
 
     /*

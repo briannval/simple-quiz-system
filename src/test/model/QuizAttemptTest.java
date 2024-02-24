@@ -28,7 +28,7 @@ public class QuizAttemptTest {
         this.questions.add(new Numerical(1,"What is sin half pi?",5));
         this.questions.add(new TrueFalse("Is Kyoto the capital of Korea?",false,5));
         this.questions.add(new TrueFalse("Is Vancouver part of BC?",true,5));
-        quiz = new Quiz(questions, "Brian's quiz");
+        quiz = new Quiz(0, questions, "Brian's quiz");
         test = new QuizAttempt(quiz);
     }
 

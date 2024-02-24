@@ -21,6 +21,4 @@ public interface Question<T> extends Writeable {
     String getFormat();
 
     boolean checkAnswer(T answer);
-
-
 }

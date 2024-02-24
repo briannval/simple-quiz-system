@@ -30,7 +30,7 @@ public class QuizTest {
         this.questions.add(new Numerical(1,"What is sin half pi?",5));
         this.questions.add(new TrueFalse("Is Kyoto the capital of Korea?",false,5));
         this.questions.add(new TrueFalse("Is Vancouver part of BC?",true,5));
-        test = new Quiz(questions, "Brian's quiz");
+        test = new Quiz(0, questions, "Brian's quiz");
     }
 
     @Test

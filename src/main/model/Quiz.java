@@ -23,14 +23,13 @@ public class Quiz implements Writeable {
      * REQUIRES: questions of varying format (or same, if preferable)
      * EFFECTS: initializes the question list to be the questions provided,
      *          calculates the number of each type of question,
-     *          and initializing stars to be 0
      */
-    public Quiz(List<Question> questions, String name) {
+    public Quiz(int stars, List<Question> questions, String name) {
         this.questions = questions;
         for (Question question: questions) {
             this.maxPoints += question.getPoints();
         }
-        this.stars = 0;
+        this.stars = stars;
         this.name = name;
     }
 
@@ -86,7 +85,6 @@ public class Quiz implements Writeable {
         JSONObject json = new JSONObject();
         json.put("stars", this.stars);
         json.put("questions", questionsToJson());
-        json.put("maxPoints", this.maxPoints);
         json.put("name", this.name);
         return json;
     }
