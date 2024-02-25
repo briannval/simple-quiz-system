@@ -39,7 +39,7 @@
         "questions": [{
             "question": "i am cool",
             "format": "True False",
-            "completed": true,
+            "completed": false,
             "correctAnswer": true,
             "explanation": "",
             "points": 5

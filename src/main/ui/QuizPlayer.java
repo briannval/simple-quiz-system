@@ -32,11 +32,6 @@ public class QuizPlayer extends QuizUser {
         quizBank = new ArrayList<>();
         jsonWriter = new JsonWriter(FILE_URL);
         jsonReader = new JsonReader(FILE_URL);
-        try {
-            quizBank = jsonReader.read();
-        } catch (IOException e) {
-            System.out.println("Error reading from " + FILE_URL);
-        }
 
     }
 
@@ -81,8 +76,10 @@ public class QuizPlayer extends QuizUser {
         System.out.println("What would you like to do?");
         System.out.println("1. Create a quiz");
         System.out.println("2. Attempt a quiz");
-        System.out.println("3. Save and exit");
-        System.out.print("Choose 1, 2, or 3: ");
+        System.out.println("3. Load data");
+        System.out.println("4. Save data");
+        System.out.println("5. Exit");
+        System.out.print("Choose 1-5: ");
     }
 
     /*
@@ -129,6 +126,7 @@ public class QuizPlayer extends QuizUser {
     /*
      * EFFECTS: handles the user's interaction on what action to take during runtime
      */
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override
     public void begin() {
         while (true) {
@@ -143,7 +141,16 @@ public class QuizPlayer extends QuizUser {
                     handleAttemptQuiz();
                     break;
                 case 3:
+                    try {
+                        this.quizBank = jsonReader.read();
+                    } catch (IOException e) {
+                        System.out.println("Error reading from " + FILE_URL);
+                    }
+                    break;
+                case 4:
                     saveQuizzes();
+                    break;
+                case 5:
                     pressEnter();
                     System.exit(0);
             }
