@@ -1,0 +1,40 @@
+[
+  {
+    "questions": [{
+      "question": "2+2",
+      "format": "Numerical",
+      "correctAnswer": 4,
+      "points": 4
+    }],
+    "name": "Test Reader 1",
+    "stars": 3
+  },
+  {
+    "questions": [{
+      "question": "Who am I?",
+      "format": "Multiple Choice",
+      "correctAnswer": 65,
+      "choices": [
+        "brian",
+        "thomas",
+        "john",
+        "bob"
+      ],
+      "points": 5
+    }],
+    "name": "Test Reader 2",
+    "stars": 1
+  },
+  {
+    "questions": [{
+      "question": "i am cool",
+      "format": "True False",
+      "completed": false,
+      "correctAnswer": true,
+      "explanation": "",
+      "points": 5
+    }],
+    "name": "Test Reader 3",
+    "stars": 3
+  }
+]

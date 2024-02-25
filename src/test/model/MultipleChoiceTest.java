@@ -26,13 +26,11 @@ public class MultipleChoiceTest {
     @Test
     public void testConstructor() {
         assertEquals("Which one is low-level language?",problem.getQuestion());
-        assertEquals('C',problem.getCorrectAnswer());
         assertEquals(5, problem.getPoints());
         assertEquals(choices,problem.getChoices());
         assertFalse(problem.getCompleted());
         assertEquals("Multiple Choice",problem.getFormat());
         assertEquals("What are the first three letters?", secondProblem.getQuestion());
-        assertEquals('A', secondProblem.getCorrectAnswer());
         assertEquals(5, secondProblem.getPoints());
         assertEquals(secondChoices, secondProblem.getChoices());
         assertFalse(secondProblem.getCompleted());

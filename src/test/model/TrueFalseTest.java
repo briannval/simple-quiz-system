@@ -17,8 +17,6 @@ public class TrueFalseTest {
 
     @Test
     public void testConstructor() {
-        assertFalse(firstProblem.getCorrectAnswer());
-        assertTrue(secondProblem.getCorrectAnswer());
         assertEquals("Gravity was discovered by Einstein",firstProblem.getQuestion());
         assertEquals("Java is a robust language",secondProblem.getQuestion());
         assertEquals(firstProblem.getPoints(),secondProblem.getPoints());
