@@ -1,6 +1,7 @@
 package persistence;
 
 import model.Quiz;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -8,12 +9,17 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonReaderTest {
+    private JsonReader jsonReader;
+
+    @BeforeEach
+    public void setup() {
+        this.jsonReader = new JsonReader("./data/reader-test/nonExistentFile.json");
+    }
 
     @Test
     public void testNonexistentFile() {
-        JsonReader jsonReader = new JsonReader("./data/reader-test/nonExistentFile.json");
         try {
-            List<Quiz> quizzes = jsonReader.read();
+            this.jsonReader.read();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -22,9 +28,9 @@ public class JsonReaderTest {
 
     @Test
     public void testReaderMultipleQuestions() {
-        JsonReader jsonReader = new JsonReader("./data/reader-test/testReaderMultipleQuestions.json");
+        this.jsonReader = new JsonReader("./data/reader-test/testReaderMultipleQuestions.json");
         try {
-            List<Quiz> quizzes = jsonReader.read();
+            List<Quiz> quizzes = this.jsonReader.read();
 
             assertEquals(1, quizzes.size());
             // testing number of quizzes
@@ -60,9 +66,9 @@ public class JsonReaderTest {
 
     @Test
     public void testReaderAllQuestions() {
-        JsonReader jsonReader = new JsonReader("./data/reader-test/testReaderAllQuestions.json");
+        this.jsonReader = new JsonReader("./data/reader-test/testReaderAllQuestions.json");
         try {
-            List<Quiz> quizzes = jsonReader.read();
+            List<Quiz> quizzes = this.jsonReader.read();
 
             assertEquals(3, quizzes.size());
             // testing number of quizzes
@@ -95,4 +101,4 @@ public class JsonReaderTest {
             fail("IOException not expected");
         }
     }
-}
+    }
