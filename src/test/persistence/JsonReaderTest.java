@@ -11,13 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JsonReaderTest {
     private JsonReader jsonReader;
 
-    @BeforeEach
-    public void setup() {
-        this.jsonReader = new JsonReader("./data/reader-test/nonExistentFile.json");
-    }
-
     @Test
     public void testNonexistentFile() {
+        this.jsonReader = new JsonReader("./data/reader-test/nonExistentFile.json");
         try {
             this.jsonReader.read();
             fail("IOException expected");

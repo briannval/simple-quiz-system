@@ -1,0 +1,30 @@
+[{
+    "questions": [
+        {
+            "question": "Which one is low-level language?",
+            "format": "Multiple Choice",
+            "correctAnswer": 67,
+            "choices": [
+                "Java",
+                "Python",
+                "Assembly",
+                "C#"
+            ],
+            "points": 5
+        },
+        {
+            "question": "What are the first three letters?",
+            "format": "Multiple Choice",
+            "correctAnswer": 65,
+            "choices": [
+                "abc",
+                "def",
+                "ghi",
+                "jkl"
+            ],
+            "points": 5
+        }
+    ],
+    "name": "Test Multiple Choice",
+    "stars": 5
+}]

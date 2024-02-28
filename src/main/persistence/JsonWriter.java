@@ -1,6 +1,8 @@
 package persistence;
 
 import org.json.JSONArray;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
@@ -13,7 +15,7 @@ public class JsonWriter {
     }
 
     public void openFile() throws FileNotFoundException {
-        writer = new PrintWriter(this.filePath);
+        writer = new PrintWriter(new File(this.filePath));
     }
 
     public void closeFile() {

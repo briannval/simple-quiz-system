@@ -39,12 +39,27 @@
         "questions": [{
             "question": "i am cool",
             "format": "True False",
-            "completed": false,
             "correctAnswer": true,
             "explanation": "",
             "points": 5
         }],
         "name": "testbool",
         "stars": 2
+    },
+    {
+        "questions": [{
+            "question": "Hello",
+            "format": "Multiple Choice",
+            "correctAnswer": 68,
+            "choices": [
+                "asbd",
+                "askd",
+                "asdf",
+                "asdbf"
+            ],
+            "points": 20
+        }],
+        "name": "Brian Quiz",
+        "stars": 1
     }
 ]

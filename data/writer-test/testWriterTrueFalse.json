@@ -1,0 +1,20 @@
+[{
+    "questions": [
+        {
+            "question": "Gravity was discovered by Einstein",
+            "format": "True False",
+            "correctAnswer": false,
+            "explanation": "",
+            "points": 3
+        },
+        {
+            "question": "Java is a robust language",
+            "format": "True False",
+            "correctAnswer": true,
+            "explanation": "",
+            "points": 3
+        }
+    ],
+    "name": "Test True False",
+    "stars": 25
+}]
