@@ -85,6 +85,9 @@ public class MultipleChoice implements Question<Character> {
         return this.choices;
     }
 
+    /*
+     * EFFECTS: creates a JSON representation for multiple choice question
+     */
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -96,6 +99,9 @@ public class MultipleChoice implements Question<Character> {
         return json;
     }
 
+    /*
+     * creates JSONArray for a list of choices
+     */
     private JSONArray choicesToJson() {
         JSONArray jsonArray = new JSONArray();
 

@@ -35,6 +35,27 @@ public class QuizPlayer extends QuizUser {
 
     }
 
+    /*
+     * REQUIRES: the local json storage shouldn't be empty
+     * MODIFIES: this
+     * EFFECTS: loads all the quizzes in the json storage into quizBank
+     *          if it's unable to load, throw an IOException
+     */
+    public void loadQuizzes() {
+        try {
+            this.quizBank = jsonReader.read();
+        } catch (IOException e) {
+            System.out.println("Error reading from " + FILE_URL);
+        }
+    }
+
+    /*
+     * REQUIRES: quizzes inside the quiz bank shouldn't be empty
+     * MODIFIES: this
+     * EFFECTS: saves the quizBank quizzes to the local json storage
+     *          which is in ./data/quizzes.json
+     *          if it's unable to save, throw a FileNotFoundException
+     */
     public void saveQuizzes() {
         try {
             jsonWriter.openFile();
@@ -46,6 +67,10 @@ public class QuizPlayer extends QuizUser {
         }
     }
 
+    /*
+     * REQUIRES: quizzes inside the quiz bank shouldn't be empty
+     * EFFECTS: parses the quizzes inside the quiz bank to json
+     */
     public JSONArray quizzesToJson() {
         JSONArray jsonArray = new JSONArray();
 
@@ -125,6 +150,11 @@ public class QuizPlayer extends QuizUser {
 
     /*
      * EFFECTS: handles the user's interaction on what action to take during runtime
+     *          choice 1 allows user to create a quiz
+     *          choice 2 allows user to attempt a quiz
+     *          choice 3 allows user to read from the local json storage
+     *          choice 4 allows user to save to the local json storage
+     *          choice 5 allows user to exit the application
      */
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override

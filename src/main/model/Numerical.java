@@ -68,6 +68,9 @@ public class Numerical implements Question<Integer> {
         return this.correctAnswer == answer;
     }
 
+    /*
+     * EFFECTS: creates a JSON representation for numerical question
+     */
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

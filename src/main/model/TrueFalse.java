@@ -91,6 +91,9 @@ public class TrueFalse implements Question<Boolean> {
         return "This statement is correct because " + this.getExplanation();
     }
 
+    /*
+     * EFFECTS: creates a JSON representation for true false question
+     */
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

@@ -80,6 +80,9 @@ public class Quiz implements Writeable {
         this.stars++;
     }
 
+    /*
+     * EFFECTS: creates a JSON representation for quiz
+     */
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -89,6 +92,9 @@ public class Quiz implements Writeable {
         return json;
     }
 
+    /*
+     * EFFECTS: creates a jsonArray for a list of questions
+     */
     private JSONArray questionsToJson() {
         JSONArray jsonArray = new JSONArray();
 

@@ -11,17 +11,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+// Represents a JsonReader to read file from the local storage
 // Referenced from the JsonSerialization Demo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonReader {
     private final String filePath;
     private final List<Quiz> quizzes;
 
+    /*
+     * REQUIRES: filePath should be an existing json file in the data directory
+     * EFFECTS: initializes a JsonReader object,
+     *          creates a new arraylist for the quizzes,
+     *          and sets the target filePath
+     */
     public JsonReader(String filePath) {
         this.filePath = filePath;
         this.quizzes = new ArrayList<>();
     }
 
+    /*
+     * EFFECTS: reads all of the data in the file specified by the filePath in a string format
+     *          and returns the string
+     */
     public String readFile() throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -32,6 +43,11 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: reads the filePath specified, adds all the quizzes to the quizzes array
+     *          returns the list of quizzes
+     */
     public List<Quiz> read() throws IOException {
         String jsonData = readFile();
         JSONArray jsonArray = new JSONArray(jsonData);
@@ -39,6 +55,10 @@ public class JsonReader {
         return this.quizzes;
     }
 
+    /*
+     * REQUIRES: questionsJson must not be an empty JSONArray
+     * EFFECTS: parses a jsonArray of questions to a list of question type
+     */
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public List<Question> parseQuestionArray(JSONArray questionsJson) {
         List<Question> questions = new ArrayList<>();
@@ -77,6 +97,11 @@ public class JsonReader {
         return questions;
     }
 
+    /*
+     * REQUIRES: jsonArray must not be an empty JSONArray
+     * MODIFIES: this
+     * EFFECTS: parses a jsonArray of quizzes, adding each of the quiz to quizzes
+     */
     public void parseQuizArray(JSONArray jsonArray) {
         for (Object object: jsonArray) {
             JSONObject quiz = (JSONObject) object;
