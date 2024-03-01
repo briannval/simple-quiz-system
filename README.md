@@ -49,6 +49,8 @@ Y = quiz
 - As a user, I want to see all the quizzes that are available to try (IMPLEMENTED)
 - As a user, I want to be able to star a quiz I have just attempted (IMPLEMENTED)
 - As a user, I want to be able to create questions. (IMPLEMENTED)
+- As a user, I want to be able to load quizzes data from a JSON file. (IMPLEMENTED)
+- As a user, I want to be able to save quizzes data to a JSON file. (IMPLEMENTED)
 
 
 
