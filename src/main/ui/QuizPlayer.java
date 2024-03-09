@@ -11,8 +11,14 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 import java.io.FileNotFoundException;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
 // Represents the whole quiz system with user info
 public class QuizPlayer extends QuizUser {
+    private JFrame frame;
+    private JPanel panel;
     private static final String FILE_URL = "./data/quizzes.json";
     private final JsonWriter jsonWriter;
     private final JsonReader jsonReader;
@@ -32,7 +38,50 @@ public class QuizPlayer extends QuizUser {
         quizBank = new ArrayList<>();
         jsonWriter = new JsonWriter(FILE_URL);
         jsonReader = new JsonReader(FILE_URL);
+        welcomeGUI();
+    }
 
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    private void welcomeGUI() {
+        frame = new JFrame("Quiz Player");
+        frame.setSize(450, 450);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        panel = new JPanel();
+        panel.setBackground(new java.awt.Color(168, 255, 255));
+        // Referenced from StackOverflow
+        // https://stackoverflow.com/questions/5854005/setting-horizontal-and-vertical-margins
+        panel.setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100));
+        panel.setLayout(new FlowLayout());
+        frame.add(panel);
+        // Add your GUI components and layout here
+
+        // Example: Adding a label
+        JLabel label = new JLabel("Welcome, " + super.getName() + "!");
+        label.setFont(new Font("Monospaced", Font.BOLD, 36));
+        panel.add(label);
+        JLabel imageLabel = new JLabel(new ImageIcon("./public/welcome.gif"));
+        panel.add(imageLabel);
+
+        JButton nextButton = new JButton("Next");
+        nextButton.addActionListener(e -> {
+            // Perform some action before moving to the next step
+            int result = JOptionPane.showConfirmDialog(frame,
+                    "Are you ready to begin?",
+                    "Confirmation",
+                    JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                frame.dispose();
+                begin();
+            }
+            if (result == JOptionPane.NO_OPTION) {
+                frame.dispose();
+                System.exit(0);
+            }
+        });
+        frame.getContentPane().add(nextButton, BorderLayout.SOUTH);
+
+        // Display the frame
+        frame.setVisible(true);
     }
 
     /*
@@ -92,6 +141,7 @@ public class QuizPlayer extends QuizUser {
         System.out.println("Choose the number of quiz you would like to try");
         System.out.println("or enter -1 to exit");
     }
+
 
     /*
      * EFFECTS: prints all actions users can do inside the interface
@@ -171,11 +221,7 @@ public class QuizPlayer extends QuizUser {
                     handleAttemptQuiz();
                     break;
                 case 3:
-                    try {
-                        this.quizBank = jsonReader.read();
-                    } catch (IOException e) {
-                        System.out.println("Error reading from " + FILE_URL);
-                    }
+                    loadQuizzes();
                     break;
                 case 4:
                     saveQuizzes();
