@@ -38,9 +38,11 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         quizBank = new ArrayList<>();
         jsonWriter = new JsonWriter(FILE_URL);
         jsonReader = new JsonReader(FILE_URL);
-        welcomeGUI();
+        begin();
     }
 
+    // Referenced from StackOverflow
+    // https://stackoverflow.com/questions/10367722/clearing-my-jframe-jpanel-in-a-new-game
     public void resetPanel() {
         panel.removeAll();
         panel.revalidate();
@@ -59,11 +61,13 @@ public class QuizPlayer extends QuizUser implements ActionListener {
                 break;
             case "LoadData":
                 loadQuizzes();
-                JOptionPane.showMessageDialog(frame, "Data successfully loaded!");
+                JOptionPane.showMessageDialog(frame, "Data successfully loaded!",
+                        "Load Data", JOptionPane.WARNING_MESSAGE);
                 break;
             case "SaveData":
                 saveQuizzes();
-                JOptionPane.showMessageDialog(frame, "Data successfully saved!");
+                JOptionPane.showMessageDialog(frame, "Data successfully saved!",
+                        "Save Data", JOptionPane.WARNING_MESSAGE);
                 break;
             case "Exit":
                 frame.dispose();
@@ -71,8 +75,18 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         }
     }
 
+
+    /*
+     * EFFECTS: handles the user's interaction on what action to take during runtime
+     *          choice 1 allows user to create a quiz
+     *          choice 2 allows user to attempt a quiz
+     *          choice 3 allows user to read from the local json storage
+     *          choice 4 allows user to save to the local json storage
+     *          choice 5 allows user to exit the application
+     */
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    private void welcomeGUI() {
+    @Override
+    public void begin() {
         frame = new JFrame("Quiz Player");
         frame.setSize(450, 550);
         frame.setLocation(500, 250);
@@ -84,20 +98,22 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         panel.setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100));
         panel.setLayout(new FlowLayout());
         frame.add(panel);
-        // Add your GUI components and layout here
 
-        // Example: Adding a label
         JLabel label = new JLabel("Welcome, " + super.getName() + "!");
-        label.setFont(new Font("Tahoma", Font.BOLD, 36));
+        label.setFont(new Font("Thoma", Font.BOLD, 36));
         panel.add(label);
-        JLabel imageLabel = new JLabel(new ImageIcon("./public/welcome.gif"));
+        JLabel imageLabel = new JLabel(new ImageIcon("./public/ubc.png"));
         panel.add(imageLabel);
         JButton button1 = new JButton("Create a quiz");
         JButton button2 = new JButton("Attempt a quiz");
         JButton button3 = new JButton("Load local data");
         JButton button4 = new JButton("Save local data");
         JButton button5 = new JButton("Exit and close");
-
+        button1.setFont(new Font("Thoma", Font.PLAIN, 16));
+        button2.setFont(new Font("Thoma", Font.PLAIN, 16));
+        button3.setFont(new Font("Thoma", Font.PLAIN, 16));
+        button4.setFont(new Font("Thoma", Font.PLAIN, 16));
+        button5.setFont(new Font("Thoma", Font.PLAIN, 16));
         panel.add(button1);
         panel.add(button2);
         panel.add(button3);
@@ -156,11 +172,9 @@ public class QuizPlayer extends QuizUser implements ActionListener {
      */
     public JSONArray quizzesToJson() {
         JSONArray jsonArray = new JSONArray();
-
         for (Quiz quiz: quizBank) {
             jsonArray.put(quiz.toJson());
         }
-
         return jsonArray;
     }
 
@@ -200,17 +214,25 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         scanner.nextLine();
     }
 
+    public ImageIcon getAvatar() {
+        ImageIcon icon = new ImageIcon("./public/avatar1.jpeg");
+        Image image = icon.getImage();
+        Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        return new ImageIcon(newImage);
+    }
+
     /*
      * REQUIRES: user's quiz name must be of a non-zero length
      *           number of questions must be >= 1
      * EFFECTS: handler for the Quiz Creator class to create a quiz
      */
     public void handleCreateQuiz() {
-        System.out.println("What will your quiz name be?");
-        String quizName = scanner.nextLine();
-        System.out.println("How many questions do you want in " + quizName + "?");
-        int numProblems = scanner.nextInt();
-        scanner.nextLine();
+        String quizName = (String) JOptionPane.showInputDialog(null,"What will your quiz name be?",
+                getName() + "'s quiz", JOptionPane.PLAIN_MESSAGE, getAvatar(), null, null);
+        String problems = JOptionPane.showInputDialog(frame,
+                "How many questions do you want in " + quizName + "?", "Number of Questions",
+                JOptionPane.PLAIN_MESSAGE);
+        int numProblems = Integer.parseInt(problems);
         creator = new QuizCreator(super.getName(), super.getYear(), quizName, numProblems);
         creator.begin();
         creator.createReport();
@@ -229,48 +251,6 @@ public class QuizPlayer extends QuizUser implements ActionListener {
             starter.begin();
             starter.createReport();
             pressEnter();
-        }
-    }
-
-    /*
-     * EFFECTS: handles the user's interaction on what action to take during runtime
-     *          choice 1 allows user to create a quiz
-     *          choice 2 allows user to attempt a quiz
-     *          choice 3 allows user to read from the local json storage
-     *          choice 4 allows user to save to the local json storage
-     *          choice 5 allows user to exit the application
-     */
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    @Override
-    public void begin() {
-        while (true) {
-
-            frame.add(panel);
-            frame.setSize(300, 200);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-
-            /*
-            int menuChoice = scanner.nextInt();
-            scanner.nextLine();
-            switch (menuChoice) {
-                case 1:
-                    handleCreateQuiz();
-                    break;
-                case 2:
-                    handleAttemptQuiz();
-                    break;
-                case 3:
-                    loadQuizzes();
-                    break;
-                case 4:
-                    saveQuizzes();
-                    break;
-                case 5:
-                    pressEnter();
-                    System.exit(0);
-            }
-            */
         }
     }
 
