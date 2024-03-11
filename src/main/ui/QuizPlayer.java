@@ -2,6 +2,7 @@ package ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.List;
 
@@ -17,12 +18,13 @@ import java.awt.event.*;
 
 // Represents the whole quiz system with user info
 public class QuizPlayer extends QuizUser implements ActionListener {
+    private Map<String, List<Quiz>> orderedQuizBank;
+    private List<Quiz> quizBank;
     private JFrame frame;
     private JPanel panel;
     private static final String FILE_URL = "./data/quizzes.json";
     private final JsonWriter jsonWriter;
     private final JsonReader jsonReader;
-    private List<Quiz> quizBank;
     QuizStarter starter;
     QuizCreator creator;
     Scanner scanner = new Scanner(System.in);
@@ -61,12 +63,12 @@ public class QuizPlayer extends QuizUser implements ActionListener {
                 break;
             case "LoadData":
                 loadQuizzes();
-                JOptionPane.showMessageDialog(frame, "Data successfully loaded!",
+                JOptionPane.showMessageDialog(null, "Data successfully loaded!",
                         "Load Data", JOptionPane.WARNING_MESSAGE);
                 break;
             case "SaveData":
                 saveQuizzes();
-                JOptionPane.showMessageDialog(frame, "Data successfully saved!",
+                JOptionPane.showMessageDialog(null, "Data successfully saved!",
                         "Save Data", JOptionPane.WARNING_MESSAGE);
                 break;
             case "Exit":
@@ -192,20 +194,6 @@ public class QuizPlayer extends QuizUser implements ActionListener {
 
 
     /*
-     * EFFECTS: prints all actions users can do inside the interface
-     */
-    public void printChoices() {
-
-        System.out.println("What would you like to do?");
-        System.out.println("1. Create a quiz");
-        System.out.println("2. Attempt a quiz");
-        System.out.println("3. Load data");
-        System.out.println("4. Save data");
-        System.out.println("5. Exit");
-        System.out.print("Choose 1-5: ");
-    }
-
-    /*
      * REQUIRES: users to press enter to go next
      * EFFECTS: prompts the user to press enter before continuing next action
      */
@@ -214,24 +202,19 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         scanner.nextLine();
     }
 
-    public ImageIcon getAvatar() {
-        ImageIcon icon = new ImageIcon("./public/avatar1.jpeg");
-        Image image = icon.getImage();
-        Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        return new ImageIcon(newImage);
-    }
-
     /*
      * REQUIRES: user's quiz name must be of a non-zero length
      *           number of questions must be >= 1
      * EFFECTS: handler for the Quiz Creator class to create a quiz
      */
     public void handleCreateQuiz() {
-        String quizName = (String) JOptionPane.showInputDialog(null,"What will your quiz name be?",
-                getName() + "'s quiz", JOptionPane.PLAIN_MESSAGE, getAvatar(), null, null);
-        String problems = JOptionPane.showInputDialog(frame,
+        String quizName = (String) JOptionPane.showInputDialog(null,
+                "What will your quiz name be?", getName() + "'s Quiz", JOptionPane.PLAIN_MESSAGE,
+                Main.generateRandomAvatar(), null,
+                null);
+        String problems = (String) JOptionPane.showInputDialog(null,
                 "How many questions do you want in " + quizName + "?", "Number of Questions",
-                JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.PLAIN_MESSAGE, Main.generateRandomAvatar(), null, null);
         int numProblems = Integer.parseInt(problems);
         creator = new QuizCreator(super.getName(), super.getYear(), quizName, numProblems);
         creator.begin();
