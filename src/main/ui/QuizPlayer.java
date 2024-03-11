@@ -16,7 +16,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 // Represents the whole quiz system with user info
-public class QuizPlayer extends QuizUser {
+public class QuizPlayer extends QuizUser implements ActionListener {
     private JFrame frame;
     private JPanel panel;
     private static final String FILE_URL = "./data/quizzes.json";
@@ -41,13 +41,44 @@ public class QuizPlayer extends QuizUser {
         welcomeGUI();
     }
 
+    public void resetPanel() {
+        panel.removeAll();
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
+            case "CreateQuiz":
+                frame.dispose();
+                handleCreateQuiz();
+                break;
+            case "LoadQuiz":
+                frame.dispose();
+                handleAttemptQuiz();
+                break;
+            case "LoadData":
+                loadQuizzes();
+                JOptionPane.showMessageDialog(frame, "Data successfully loaded!");
+                break;
+            case "SaveData":
+                saveQuizzes();
+                JOptionPane.showMessageDialog(frame, "Data successfully saved!");
+                break;
+            case "Exit":
+                frame.dispose();
+                System.exit(0);
+        }
+    }
+
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void welcomeGUI() {
         frame = new JFrame("Quiz Player");
-        frame.setSize(450, 450);
+        frame.setSize(450, 550);
+        frame.setLocation(500, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
-        panel.setBackground(new java.awt.Color(168, 255, 255));
+        panel.setBackground(new java.awt.Color(255, 255, 255));
         // Referenced from StackOverflow
         // https://stackoverflow.com/questions/5854005/setting-horizontal-and-vertical-margins
         panel.setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100));
@@ -57,30 +88,33 @@ public class QuizPlayer extends QuizUser {
 
         // Example: Adding a label
         JLabel label = new JLabel("Welcome, " + super.getName() + "!");
-        label.setFont(new Font("Monospaced", Font.BOLD, 36));
+        label.setFont(new Font("Tahoma", Font.BOLD, 36));
         panel.add(label);
         JLabel imageLabel = new JLabel(new ImageIcon("./public/welcome.gif"));
         panel.add(imageLabel);
+        JButton button1 = new JButton("Create a quiz");
+        JButton button2 = new JButton("Attempt a quiz");
+        JButton button3 = new JButton("Load local data");
+        JButton button4 = new JButton("Save local data");
+        JButton button5 = new JButton("Exit and close");
 
-        JButton nextButton = new JButton("Next");
-        nextButton.addActionListener(e -> {
-            // Perform some action before moving to the next step
-            int result = JOptionPane.showConfirmDialog(frame,
-                    "Are you ready to begin?",
-                    "Confirmation",
-                    JOptionPane.YES_NO_OPTION);
-            if (result == JOptionPane.YES_OPTION) {
-                frame.dispose();
-                begin();
-            }
-            if (result == JOptionPane.NO_OPTION) {
-                frame.dispose();
-                System.exit(0);
-            }
-        });
-        frame.getContentPane().add(nextButton, BorderLayout.SOUTH);
+        panel.add(button1);
+        panel.add(button2);
+        panel.add(button3);
+        panel.add(button4);
+        panel.add(button5);
 
-        // Display the frame
+        button1.addActionListener(this);
+        button1.setActionCommand("CreateQuiz");
+        button2.addActionListener(this);
+        button2.setActionCommand("AttemptQuiz");
+        button3.addActionListener(this);
+        button3.setActionCommand("LoadData");
+        button4.addActionListener(this);
+        button4.setActionCommand("SaveData");
+        button5.addActionListener(this);
+        button5.setActionCommand("Exit");
+
         frame.setVisible(true);
     }
 
@@ -210,7 +244,13 @@ public class QuizPlayer extends QuizUser {
     @Override
     public void begin() {
         while (true) {
-            printChoices();
+
+            frame.add(panel);
+            frame.setSize(300, 200);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(true);
+
+            /*
             int menuChoice = scanner.nextInt();
             scanner.nextLine();
             switch (menuChoice) {
@@ -230,6 +270,7 @@ public class QuizPlayer extends QuizUser {
                     pressEnter();
                     System.exit(0);
             }
+            */
         }
     }
 
