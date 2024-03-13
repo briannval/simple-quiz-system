@@ -18,16 +18,17 @@ import java.awt.event.*;
 
 // Represents the whole quiz system with user info
 public class QuizPlayer extends QuizUser implements ActionListener {
+    private static final String FILE_URL = "./data/quizzes.json";
     private Map<String, List<Quiz>> orderedQuizBank;
     private List<Quiz> quizBank;
     private JFrame frame;
     private JPanel panel;
-    private static final String FILE_URL = "./data/quizzes.json";
     private final JsonWriter jsonWriter;
     private final JsonReader jsonReader;
     QuizStarter starter;
     QuizCreator creator;
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner;
+    boolean wait;
 
     /*
      * REQUIRES: name must be of non-zero length
@@ -40,16 +41,11 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         quizBank = new ArrayList<>();
         jsonWriter = new JsonWriter(FILE_URL);
         jsonReader = new JsonReader(FILE_URL);
+        scanner = new Scanner(System.in);
+        initGUI();
         begin();
     }
 
-    // Referenced from StackOverflow
-    // https://stackoverflow.com/questions/10367722/clearing-my-jframe-jpanel-in-a-new-game
-    public void resetPanel() {
-        panel.removeAll();
-        panel.revalidate();
-        panel.repaint();
-    }
 
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -77,7 +73,6 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         }
     }
 
-
     /*
      * EFFECTS: handles the user's interaction on what action to take during runtime
      *          choice 1 allows user to create a quiz
@@ -87,8 +82,7 @@ public class QuizPlayer extends QuizUser implements ActionListener {
      *          choice 5 allows user to exit the application
      */
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    @Override
-    public void begin() {
+    public void initGUI() {
         frame = new JFrame("Quiz Player");
         frame.setSize(450, 550);
         frame.setLocation(500, 250);
@@ -125,15 +119,21 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         button1.addActionListener(this);
         button1.setActionCommand("CreateQuiz");
         button2.addActionListener(this);
-        button2.setActionCommand("AttemptQuiz");
+        button2.setActionCommand("LoadQuiz");
         button3.addActionListener(this);
         button3.setActionCommand("LoadData");
         button4.addActionListener(this);
         button4.setActionCommand("SaveData");
         button5.addActionListener(this);
         button5.setActionCommand("Exit");
+    }
 
+
+    @Override
+    public void begin() {
         frame.setVisible(true);
+        frame.toFront();
+        frame.requestFocus();
     }
 
     /*
@@ -220,6 +220,7 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         creator.begin();
         creator.createReport();
         quizBank.add(creator.createQuiz());
+        begin();
     }
 
     /*
@@ -235,6 +236,7 @@ public class QuizPlayer extends QuizUser implements ActionListener {
             starter.createReport();
             pressEnter();
         }
+        begin();
     }
 
     /*

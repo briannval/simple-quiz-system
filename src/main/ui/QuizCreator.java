@@ -2,6 +2,7 @@ package ui;
 
 import model.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -163,6 +164,7 @@ public class QuizCreator extends QuizUser {
      */
     @Override
     public void createReport() {
-        System.out.println("You have successfully created your quiz!");
+        JOptionPane.showMessageDialog(null, "Quiz successfully created!",
+                "Load Data", JOptionPane.WARNING_MESSAGE);
     }
 }
