@@ -3,12 +3,11 @@ package ui;
 import model.*;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 // Represents the user interface for creating a quiz
 public class QuizCreator extends QuizUser {
+    private JPanel panel;
     QuizMaker maker;
     String quizName;
     int numProblems;
@@ -29,18 +28,6 @@ public class QuizCreator extends QuizUser {
         maker = new QuizMaker(quizName, numProblems);
     }
 
-    /*
-     * REQUIRES: c must be of type char
-     * EFFECTS: converts the character t to boolean true,
-     *          and character f to boolean false,
-     *          used in creating boolean questions
-     */
-    public boolean charToBool(char c) {
-        if (c == 't') {
-            return true;
-        }
-        return false;
-    }
 
     /*
      * REQUIRES: user input of question statement must be non-zero length
@@ -50,6 +37,9 @@ public class QuizCreator extends QuizUser {
      * EFFECTS: adds a new True False question to the Quiz Maker class
      */
     public void createTrueFalse() {
+        QuestionUI.trueFalsePanel(maker);
+        // Console method listed below
+        /*
         String question;
         int points;
         char correctAnswer;
@@ -60,6 +50,7 @@ public class QuizCreator extends QuizUser {
         System.out.println("How many points is this question worth?");
         points = scanner.nextInt();
         maker.addTrueFalseQuestion(question, charToBool(correctAnswer), points);
+        */
     }
 
     /*
@@ -70,6 +61,9 @@ public class QuizCreator extends QuizUser {
      * EFFECTS: adds a Numerical question to the Quiz Maker class
      */
     public void createNumerical() {
+        QuestionUI.numericalPanel(maker);
+        // Console method listed below
+        /*
         String question;
         int points;
         int correctAnswer;
@@ -80,6 +74,7 @@ public class QuizCreator extends QuizUser {
         System.out.println("How many points is this question worth?");
         points = scanner.nextInt();
         maker.addNumericalQuestion(correctAnswer, question, points);
+         */
     }
 
     /*
@@ -91,6 +86,9 @@ public class QuizCreator extends QuizUser {
      *
      */
     public void createMultipleChoice() {
+        QuestionUI.multipleChoicePanel(maker);
+        // Console method listed below
+        /*
         List<String> choices = new ArrayList<>();
         String question;
         int points;
@@ -110,6 +108,7 @@ public class QuizCreator extends QuizUser {
         System.out.println("How many points is this question worth?");
         points = scanner.nextInt();
         maker.addMultipleChoiceQuestion(correctAnswer, question, points, choices);
+         */
     }
 
     /*
@@ -137,24 +136,43 @@ public class QuizCreator extends QuizUser {
      * EFFECTS: creates questions of different formats for the format
      *          specified by the user
      */
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override
     public void begin() {
-        System.out.println("Let's start creating your quiz!");
+        // System.out.println("Let's start creating your quiz!");
+        JOptionPane.showMessageDialog(null, "Let's start creating your quiz!",
+                "Create Quiz", JOptionPane.WARNING_MESSAGE);
         for (int i = 0; i < this.numProblems; i++) {
-            System.out.println("NUMBER " + String.valueOf(i + 1));
-            switch (prompt()) {
-                case 1:
-                    scanner.nextLine();
-                    createMultipleChoice();
-                    break;
-                case 2:
-                    scanner.nextLine();
-                    createTrueFalse();
-                    break;
-                case 3:
-                    scanner.nextLine();
-                    createNumerical();
-                    break;
+            panel = new JPanel();
+            ButtonGroup bg = new ButtonGroup();
+            JRadioButton mc = new JRadioButton("Multiple Choice");
+            JRadioButton tf = new JRadioButton("True False");
+            JRadioButton nm = new JRadioButton("Numerical");
+            mc.setActionCommand("MultipleChoice");
+            tf.setActionCommand("TrueFalse");
+            nm.setActionCommand("Numerical");
+            bg.add(mc);
+            bg.add(tf);
+            bg.add(nm);
+            panel.add(new JLabel("Question Type: "));
+            panel.add(mc);
+            panel.add(tf);
+            panel.add(nm);
+            int result = JOptionPane.showConfirmDialog(null, panel,
+                    "Please choose question type for number " + (i + 1), JOptionPane.OK_CANCEL_OPTION);
+            // System.out.println("NUMBER " + String.valueOf(i + 1));
+            if (result == JOptionPane.OK_OPTION) {
+                switch (bg.getSelection().getActionCommand()) {
+                    case "MultipleChoice":
+                        createMultipleChoice();
+                        break;
+                    case "TrueFalse":
+                        createTrueFalse();
+                        break;
+                    case "Numerical":
+                        createNumerical();
+                        break;
+                }
             }
         }
     }

@@ -210,11 +210,11 @@ public class QuizPlayer extends QuizUser implements ActionListener {
     public void handleCreateQuiz() {
         String quizName = (String) JOptionPane.showInputDialog(null,
                 "What will your quiz name be?", getName() + "'s Quiz", JOptionPane.PLAIN_MESSAGE,
-                Main.generateRandomAvatar(), null,
+                Utils.generateRandomAvatar(), null,
                 null);
         String problems = (String) JOptionPane.showInputDialog(null,
                 "How many questions do you want in " + quizName + "?", "Number of Questions",
-                JOptionPane.PLAIN_MESSAGE, Main.generateRandomAvatar(), null, null);
+                JOptionPane.PLAIN_MESSAGE, Utils.generateRandomAvatar(), null, null);
         int numProblems = Integer.parseInt(problems);
         creator = new QuizCreator(super.getName(), super.getYear(), quizName, numProblems);
         creator.begin();

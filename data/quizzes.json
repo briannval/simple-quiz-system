@@ -71,5 +71,15 @@
         }],
         "name": "abcdef",
         "stars": 0
+    },
+    {
+        "questions": [{
+            "question": "1+1",
+            "format": "Numerical",
+            "correctAnswer": 2,
+            "points": 5
+        }],
+        "name": "Brian's Quiz",
+        "stars": 0
     }
 ]
