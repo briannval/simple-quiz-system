@@ -1,85 +1,31 @@
-[
-    {
-        "questions": [{
-            "question": "1+1",
-            "format": "Numerical",
-            "correctAnswer": 2,
-            "points": 4
-        }],
-        "name": "test",
-        "stars": 4
-    },
-    {
-        "questions": [{
-            "question": "1+1",
-            "format": "Numerical",
-            "correctAnswer": 2,
-            "points": 4
-        }],
-        "name": "test",
-        "stars": 2
-    },
-    {
-        "questions": [{
-            "question": "who am i",
+[{
+    "questions": [
+        {
+            "question": "What is this course?",
             "format": "Multiple Choice",
-            "correctAnswer": 65,
+            "correctAnswer": 97,
             "choices": [
-                "brian",
-                "thomas",
-                "john",
-                "bob"
+                "CPSC 210",
+                "CPSC 213",
+                "CPSC 110",
+                "CPSC 121"
             ],
-            "points": 5
-        }],
-        "name": "brian",
-        "stars": 1
-    },
-    {
-        "questions": [{
-            "question": "i am cool",
+            "points": 10
+        },
+        {
+            "question": "Felix is amazing!",
             "format": "True False",
             "correctAnswer": true,
             "explanation": "",
-            "points": 5
-        }],
-        "name": "testbool",
-        "stars": 2
-    },
-    {
-        "questions": [{
-            "question": "Hello",
-            "format": "Multiple Choice",
-            "correctAnswer": 68,
-            "choices": [
-                "asbd",
-                "askd",
-                "asdf",
-                "asdbf"
-            ],
-            "points": 20
-        }],
-        "name": "Brian Quiz",
-        "stars": 1
-    },
-    {
-        "questions": [{
+            "points": 10
+        },
+        {
             "question": "1+1",
             "format": "Numerical",
             "correctAnswer": 2,
             "points": 5
-        }],
-        "name": "abcdef",
-        "stars": 0
-    },
-    {
-        "questions": [{
-            "question": "1+1",
-            "format": "Numerical",
-            "correctAnswer": 2,
-            "points": 5
-        }],
-        "name": "Brian's Quiz",
-        "stars": 0
-    }
-]
+        }
+    ],
+    "name": "AllTypeQuiz",
+    "stars": 0
+}]

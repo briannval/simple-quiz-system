@@ -1,6 +1,6 @@
 package ui;
 
-import model.QuizMaker;
+import model.*;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -13,6 +13,91 @@ import java.util.List;
 // https://stackoverflow.com/questions/1534889/how-to-make-jlabels-start-on-the-next-line
 // Displays prompts for user to make questions in QuizCreator
 public class QuestionUI {
+
+    /*
+     * REQUIRES: an instantiated QuizAttempt, and a valid question number
+     * MODIFIES: attempt
+     * EFFECTS: prompts the user to answer a multiple choice question
+     */
+    public static void askMultipleChoicePanel(MultipleChoice mcq, QuizAttempt attempt, int questionNumber) {
+        JTextField answerField = new JTextField(20);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new JLabel("Question " + (questionNumber + 1) + ": " + mcq.getQuestion()));
+        panel.add(Box.createHorizontalStrut(15));
+        panel.add(new JLabel("a. " + mcq.getChoices().get(0)));
+        panel.add(Box.createHorizontalStrut(15));
+        panel.add(new JLabel("b. " + mcq.getChoices().get(1)));
+        panel.add(Box.createHorizontalStrut(15));
+        panel.add(new JLabel("c. " + mcq.getChoices().get(2)));
+        panel.add(Box.createHorizontalStrut(15));
+        panel.add(new JLabel("d. " + mcq.getChoices().get(3)));
+        panel.add(Box.createHorizontalStrut(15));
+        panel.add(new JLabel("Answer with either a, b, c, or d"));
+        panel.add(Box.createHorizontalStrut(15));
+        panel.add(answerField);
+
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Question " + questionNumber, JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String answerString = answerField.getText();
+            char answer = answerString.charAt(0);
+            attempt.attemptQuestion(questionNumber, answer);
+        }
+    }
+
+    /*
+     * REQUIRES: an instantiated QuizAttempt, and a valid question number
+     * MODIFIES: attempt
+     * EFFECTS: prompts the user to answer a true false question
+     */
+    public static void askTrueFalsePanel(TrueFalse tf, QuizAttempt attempt, int questionNumber) {
+        JTextField answerField = new JTextField(20);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new JLabel("Question " + (questionNumber + 1) + ": " + tf.getQuestion()));
+        panel.add(Box.createHorizontalStrut(15));
+        panel.add(new JLabel("Answer with either t or f"));
+        panel.add(answerField);
+        panel.add(Box.createHorizontalStrut(15));
+
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Question " + questionNumber, JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String answerString = answerField.getText();
+            char answer = answerString.charAt(0);
+            attempt.attemptQuestion(questionNumber, Utils.charToBool(answer));
+        }
+    }
+
+    /*
+     * REQUIRES: an instantiated QuizAttempt, and a valid question number
+     * MODIFIES: attempt
+     * EFFECTS: prompts the user to answer a multiple choice question
+     */
+    public static void askNumericalPanel(Numerical num, QuizAttempt attempt, int questionNumber) {
+        JTextField answerField = new JTextField(20);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new JLabel("Question " + (questionNumber + 1) + ": " + num.getQuestion()));
+        panel.add(answerField);
+        panel.add(Box.createHorizontalStrut(15));
+
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Question " + questionNumber, JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            int answer = Integer.parseInt(answerField.getText());
+            attempt.attemptQuestion(questionNumber, answer);
+        }
+    }
+
+
 
     /*
      * REQUIRES: an instantiated QuizMaker

@@ -28,7 +28,16 @@ public class QuizPlayer extends QuizUser implements ActionListener {
     QuizStarter starter;
     QuizCreator creator;
     Scanner scanner;
-    boolean wait;
+
+    /*
+     * REQUIRES: quizBank cannot be empty;
+     * MODIFIES: this
+     * EFFECTS: order the quiz bank by stars ascending / descending
+     *          and name ascending / descending
+     */
+    private void updateOrderedQuizBank() {
+        // pass
+    }
 
     /*
      * REQUIRES: name must be of non-zero length

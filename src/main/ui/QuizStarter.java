@@ -1,10 +1,8 @@
 package ui;
 
-import model.Quiz;
-import model.QuizAttempt;
-import model.Question;
-import model.MultipleChoice;
+import model.*;
 
+import javax.swing.*;
 import java.util.Scanner;
 import java.util.List;
 
@@ -84,18 +82,31 @@ public class QuizStarter extends QuizUser {
     public void begin() {
         int i = 0;
         for (Question question: quiz.getAllQuestions()) {
+            /*
             System.out.println("NUMBER " + String.valueOf(i + 1));
             System.out.println(question.getQuestion());
+             */
             switch (question.getFormat()) {
                 case "Multiple Choice":
-                    MultipleChoice specificQuestion = (MultipleChoice) question;
-                    attempt.attemptQuestion(i, getMultipleChoiceAnswer(specificQuestion.getChoices()));
+                    MultipleChoice mcq = (MultipleChoice) question;
+                    /*
+                    attempt.attemptQuestion(i, getMultipleChoiceAnswer(mcq.getChoices()));
+                     */
+                    QuestionUI.askMultipleChoicePanel(mcq, attempt, i);
                     break;
                 case "Numerical":
+                    Numerical num = (Numerical) question;
+                    /*
                     attempt.attemptQuestion(i, getNumericalAnswer());
+                     */
+                    QuestionUI.askNumericalPanel(num, attempt, i);
                     break;
                 case "True False":
+                    TrueFalse tf = (TrueFalse) question;
+                    /*
                     attempt.attemptQuestion(i, getTrueFalseAnswer());
+                     */
+                    QuestionUI.askTrueFalsePanel(tf, attempt, i);
                     break;
             }
             i++;
@@ -111,6 +122,7 @@ public class QuizStarter extends QuizUser {
      */
     @Override
     public void createReport() {
-        System.out.println(attempt.generateReport());
+        JOptionPane.showMessageDialog(null, attempt.generateReport(),
+                "Results", JOptionPane.WARNING_MESSAGE);
     }
 }
