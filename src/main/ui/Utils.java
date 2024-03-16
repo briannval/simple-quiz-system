@@ -6,6 +6,12 @@ import java.util.Random;
 
 public class Utils {
 
+    public static void requestFrameFocus(JFrame frame) {
+        frame.setVisible(true);
+        frame.toFront();
+        frame.requestFocus();
+    }
+
     // Referenced from StackOverflow
     // https://stackoverflow.com/questions/10367722/clearing-my-jframe-jpanel-in-a-new-game
     public static void resetPanel(JPanel panel) {

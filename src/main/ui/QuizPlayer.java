@@ -28,6 +28,7 @@ public class QuizPlayer extends QuizUser implements ActionListener {
     QuizStarter starter;
     QuizCreator creator;
     Scanner scanner;
+    QuizUI quizUI;
 
     /*
      * REQUIRES: quizBank cannot be empty;
@@ -140,9 +141,7 @@ public class QuizPlayer extends QuizUser implements ActionListener {
 
     @Override
     public void begin() {
-        frame.setVisible(true);
-        frame.toFront();
-        frame.requestFocus();
+        Utils.requestFrameFocus(this.frame);
     }
 
     /*
@@ -191,7 +190,6 @@ public class QuizPlayer extends QuizUser implements ActionListener {
 
     /*
      * EFFECTS: displays all the quizzes currently inside the quiz bank
-     */
     public void displayQuizNames() {
         for (int i = 0; i < quizBank.size(); i++) {
             System.out.println((i + 1) + " " + quizBank.get(i).getName());
@@ -202,14 +200,13 @@ public class QuizPlayer extends QuizUser implements ActionListener {
     }
 
 
-    /*
      * REQUIRES: users to press enter to go next
      * EFFECTS: prompts the user to press enter before continuing next action
-     */
     public void pressEnter() {
         System.out.println("Press enter to continue...");
         scanner.nextLine();
     }
+    */
 
     /*
      * REQUIRES: user's quiz name must be of a non-zero length
@@ -237,6 +234,8 @@ public class QuizPlayer extends QuizUser implements ActionListener {
      * EFFECTS: handler for the Quiz Starter class to start a quiz
      */
     public void handleAttemptQuiz() {
+        quizUI = new QuizUI(quizBank, starter, super.getName(), super.getYear(), this);
+        /*
         displayQuizNames();
         int quizChoice = scanner.nextInt();
         if (quizChoice != -1) {
@@ -246,6 +245,7 @@ public class QuizPlayer extends QuizUser implements ActionListener {
             pressEnter();
         }
         begin();
+         */
     }
 
     /*

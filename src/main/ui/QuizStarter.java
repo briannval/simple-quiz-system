@@ -23,11 +23,11 @@ public class QuizStarter extends QuizUser {
         this.attempt = new QuizAttempt(quiz);
     }
 
+    // Old console methods
     /*
      * REQUIRES: a choices list of length 4
      *           user input must be a single character (A,B,C,D)
      * EFFECTS: prompts the user for a multiple choice answer
-     */
     public char getMultipleChoiceAnswer(List<String> choices) {
         System.out.println("A. " + choices.get(0));
         System.out.println("B. " + choices.get(1));
@@ -38,20 +38,16 @@ public class QuizStarter extends QuizUser {
         return userAnswer.charAt(0);
     }
 
-    /*
      * REQUIRES: user's input must be an integer
      * EFFECTS: prompts the user for an integer answer
-     */
     public int getNumericalAnswer() {
         System.out.println("Input a numerical answer below");
         int userAnswer = scanner.nextInt();
         return userAnswer;
     }
 
-    /*
      * REQUIRES: user's input must be a single character (t/f)
      * EFFECTS: prompts the user for a true false answer
-     */
     public boolean getTrueFalseAnswer() {
         System.out.println("Is the statement true or false?");
         System.out.println("Choose t for true, f for false");
@@ -61,6 +57,7 @@ public class QuizStarter extends QuizUser {
         }
         return false;
     }
+    */
 
     /*
      * REQUIRES: userAnswer must be 't' or 'f'
@@ -111,9 +108,14 @@ public class QuizStarter extends QuizUser {
             }
             i++;
         }
+
+        /*
         System.out.println("Do you want to star this quiz? (t/f) ");
         char userAnswer = scanner.next().charAt(0);
         handleUserStar(userAnswer);
+        */
+
+        QuestionUI.handleUserStarPanel(this);
     }
 
     /*

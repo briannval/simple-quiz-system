@@ -15,6 +15,30 @@ import java.util.List;
 public class QuestionUI {
 
     /*
+     * REQUIRES: a QuizStarter which has ended the quiz
+     * MODIFIES: starter
+     * EFFECTS: stars the quiz if user indicates so
+     */
+    public static void handleUserStarPanel(QuizStarter starter) {
+        JTextField answerField = new JTextField(20);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new JLabel("Do you want to star this quiz? (t/f)"));
+        panel.add(answerField);
+        panel.add(Box.createHorizontalStrut(15));
+
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Star Confirmation", JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String answerString = answerField.getText();
+            char answer = answerString.charAt(0);
+            starter.handleUserStar(answer);
+        }
+    }
+
+    /*
      * REQUIRES: an instantiated QuizAttempt, and a valid question number
      * MODIFIES: attempt
      * EFFECTS: prompts the user to answer a multiple choice question
@@ -39,7 +63,7 @@ public class QuestionUI {
         panel.add(answerField);
 
         int result = JOptionPane.showConfirmDialog(null, panel,
-                "Question " + questionNumber, JOptionPane.OK_CANCEL_OPTION);
+                "Question " + (questionNumber + 1), JOptionPane.OK_CANCEL_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
             String answerString = answerField.getText();
@@ -65,7 +89,7 @@ public class QuestionUI {
         panel.add(Box.createHorizontalStrut(15));
 
         int result = JOptionPane.showConfirmDialog(null, panel,
-                "Question " + questionNumber, JOptionPane.OK_CANCEL_OPTION);
+                "Question " + (questionNumber + 1), JOptionPane.OK_CANCEL_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
             String answerString = answerField.getText();
@@ -89,7 +113,7 @@ public class QuestionUI {
         panel.add(Box.createHorizontalStrut(15));
 
         int result = JOptionPane.showConfirmDialog(null, panel,
-                "Question " + questionNumber, JOptionPane.OK_CANCEL_OPTION);
+                "Question " + (questionNumber + 1), JOptionPane.OK_CANCEL_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
             int answer = Integer.parseInt(answerField.getText());

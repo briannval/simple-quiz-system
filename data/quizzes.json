@@ -1,31 +1,70 @@
-[{
-    "questions": [
-        {
-            "question": "What is this course?",
+[
+    {
+        "questions": [
+            {
+                "question": "What is this course?",
+                "format": "Multiple Choice",
+                "correctAnswer": 97,
+                "choices": [
+                    "CPSC 210",
+                    "CPSC 213",
+                    "CPSC 110",
+                    "CPSC 121"
+                ],
+                "points": 10
+            },
+            {
+                "question": "Felix is amazing!",
+                "format": "True False",
+                "correctAnswer": true,
+                "explanation": "",
+                "points": 10
+            },
+            {
+                "question": "1+1",
+                "format": "Numerical",
+                "correctAnswer": 2,
+                "points": 5
+            }
+        ],
+        "name": "AllTypeQuiz",
+        "stars": 1
+    },
+    {
+        "questions": [{
+            "question": "Name(s) of the great professor(s) ?",
             "format": "Multiple Choice",
-            "correctAnswer": 97,
+            "correctAnswer": 100,
             "choices": [
-                "CPSC 210",
-                "CPSC 213",
-                "CPSC 110",
-                "CPSC 121"
+                "Gregor Kiczales",
+                "Felix Grund",
+                "Karina Mochetti",
+                "All of the above"
             ],
             "points": 10
-        },
-        {
-            "question": "Felix is amazing!",
+        }],
+        "name": "AllMultipleChoiceQuiz",
+        "stars": 2
+    },
+    {
+        "questions": [{
+            "question": "5 x 5",
+            "format": "Numerical",
+            "correctAnswer": 25,
+            "points": 20
+        }],
+        "name": "AllNumericalQuiz",
+        "stars": 0
+    },
+    {
+        "questions": [{
+            "question": "You shouldn't cheat on exams",
             "format": "True False",
             "correctAnswer": true,
             "explanation": "",
-            "points": 10
-        },
-        {
-            "question": "1+1",
-            "format": "Numerical",
-            "correctAnswer": 2,
-            "points": 5
-        }
-    ],
-    "name": "AllTypeQuiz",
-    "stars": 0
-}]
+            "points": 20
+        }],
+        "name": "AllTrueFalseQuiz",
+        "stars": 0
+    }
+]
