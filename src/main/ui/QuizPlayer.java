@@ -57,6 +57,10 @@ public class QuizPlayer extends QuizUser implements ActionListener {
     }
 
 
+    /*
+     * REQUIRES: an accurate ActionEvent performed by the button
+     * EFFECTS: makes changes to the screen after user response
+     */
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "CreateQuiz":
@@ -139,6 +143,9 @@ public class QuizPlayer extends QuizUser implements ActionListener {
     }
 
 
+    /*
+     * EFFECTS: gets the frame into focus
+     */
     @Override
     public void begin() {
         Utils.requestFrameFocus(this.frame);

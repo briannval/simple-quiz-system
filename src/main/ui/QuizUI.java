@@ -11,21 +11,26 @@ import java.util.List;
 
 // Referenced from StackOverflow
 // https://stackoverflow.com/questions/12542185/sort-a-java-collection-object-based-on-one-field-in-it
+// A class to display all the quizzes and sort them based on user's input
 public class QuizUI implements ActionListener {
-    private Map<String, List<Quiz>> allQuizzes;
+    private final Map<String, List<Quiz>> allQuizzes;
     private final String nameAscending = "name_ascending";
     private final String nameDescending = "name_descending";
     private final String starsAscending = "stars_ascending";
     private final String starsDescending = "stars_descending";
     private QuizStarter starter;
-    private QuizPlayer player;
-    private JFrame frame;
-    private JPanel panel;
-    private JScrollPane scrollPane;
+    private final QuizPlayer player;
+    private final JFrame frame;
+    private final JPanel panel;
     private String currState;
-    private String name;
-    private int year;
+    private final String name;
+    private final int year;
 
+    /*
+     * REQUIRES: a non-empty quizBank, an initialized QuizStarter, the user's name, year of birth,
+     *           and an initialized QuizPlayer
+     * EFFECTS: initializes a frame of quizzes and a map of all quizzes sorted
+     */
     public QuizUI(List<Quiz> quizBank, QuizStarter starter, String name, int year, QuizPlayer player) {
         this.allQuizzes = new HashMap<>();
         this.starter = starter;
@@ -39,12 +44,16 @@ public class QuizUI implements ActionListener {
         frame.setLocation(500, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
-        scrollPane = new JScrollPane();
         sorter();
         initGui();
         quizGui();
     }
 
+    /*
+     * REQUIRES: a non-empty list of quizzes
+     * EFFECTS: performs a deep copy of the quizzes list
+     *          quizzes reference still remains
+     */
     public List<Quiz> copyQuizList(List<Quiz> list) {
         List<Quiz> newQuizList = new ArrayList<>();
         for (Quiz q: list) {
@@ -76,6 +85,9 @@ public class QuizUI implements ActionListener {
         allQuizzes.put(starsDescending, copyQuizList(temp));
     }
 
+    /*
+     * EFFECTS: gives the initial GUI of operation to be performed on all the quizzes
+     */
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void initGui() {
         panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -116,17 +128,23 @@ public class QuizUI implements ActionListener {
         panel.add(Box.createVerticalStrut(40));
     }
 
+    /*
+     * EFFECTS: returns a list of quizzes sorted as requested by the user
+     */
     private List<Quiz> getCurrStateQuizzes() {
         return allQuizzes.get(this.currState);
     }
 
+    /*
+     * REQUIRES: prints out all the list of quizzes onto the frame
+     */
     private void quizGui() {
         int counter = 1;
         for (Quiz q: getCurrStateQuizzes()) {
             JLabel quizNameLabel = new JLabel(counter + ". " + q.getName());
             JLabel quizStarsLabel = new JLabel("Stars: " + q.getStars());
-            quizNameLabel.setFont(new Font("Thoma", Font.CENTER_BASELINE, 20));
-            quizStarsLabel.setFont(new Font("Thoma", Font.PLAIN, 20));
+            quizNameLabel.setFont(new Font("Thoma", Font.BOLD, 18));
+            quizStarsLabel.setFont(new Font("Thoma", Font.PLAIN, 18));
             panel.add(quizNameLabel);
             panel.add(Box.createHorizontalStrut(15));
             panel.add(quizStarsLabel);
@@ -141,9 +159,13 @@ public class QuizUI implements ActionListener {
         Utils.requestFrameFocus(this.frame);
     }
 
+    /*
+     * MODIFIES: an accurate ActionEvent performed by the button
+     * EFFECTS: makes changes to the screen after user response
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand() != "select_quiz") {
+        if (!e.getActionCommand().equals("select_quiz")) {
             this.currState = e.getActionCommand();
             Utils.resetPanel(panel);
             initGui();
@@ -153,7 +175,10 @@ public class QuizUI implements ActionListener {
                     "Select a number from 1 to " + getCurrStateQuizzes().size(), "Get Quiz",
                     JOptionPane.PLAIN_MESSAGE, Utils.generateRandomAvatar(), null, null);
             frame.dispose();
-            starter = new QuizStarter(name, year, getCurrStateQuizzes().get(Integer.parseInt(quizSelectionString) - 1));
+            Quiz startQuiz = getCurrStateQuizzes().get(Integer.parseInt(quizSelectionString) - 1);
+            JOptionPane.showMessageDialog(null, "We will now begin " + startQuiz.getName(),
+                    "Start Quiz", JOptionPane.WARNING_MESSAGE);
+            starter = new QuizStarter(name, year, startQuiz);
             starter.begin();
             starter.createReport();
             player.begin();

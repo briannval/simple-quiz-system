@@ -28,7 +28,7 @@
             }
         ],
         "name": "AllTypeQuiz",
-        "stars": 1
+        "stars": 2
     },
     {
         "questions": [{
@@ -44,7 +44,7 @@
             "points": 10
         }],
         "name": "AllMultipleChoiceQuiz",
-        "stars": 2
+        "stars": 3
     },
     {
         "questions": [{
@@ -65,6 +65,6 @@
             "points": 20
         }],
         "name": "AllTrueFalseQuiz",
-        "stars": 0
+        "stars": 1
     }
 ]
