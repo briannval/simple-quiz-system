@@ -69,7 +69,7 @@ guide the user in the process of creating a quiz.
 - You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking sort
 on the View All Quizzes panel. This will allow you to sort the quizzes either 1. alphabetically, or 2. by stars, both
 ascending or descending
-- You can locate my visual component by seeing the main panel, icons added to buttons etc
+- You can locate my visual component by seeing the main panel, icons added to panes etc
 - You can save the state of my application by clicking the Save Data button on the main panel
 - You can reload the state of my application by clicking the Load Data button on the main panel
 
