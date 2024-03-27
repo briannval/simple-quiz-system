@@ -94,15 +94,15 @@ public class QuizUI implements ActionListener {
         // Referenced from StackOverflow
         // https://stackoverflow.com/questions/5854005/setting-horizontal-and-vertical-margins
         panel.setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100));
-        panel.setLayout(new FlowLayout());
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         frame.add(panel);
         ImageIcon icon = new ImageIcon("./public/ubccs.png");
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         JLabel imageLabel = new JLabel(new ImageIcon(newImage));
         panel.add(imageLabel);
-        panel.add(Box.createVerticalStrut(50));
-        JLabel label = new JLabel("Sort quizzes by:");
+        panel.add(Box.createVerticalStrut(20));
+        JLabel label = new JLabel("Sort by:");
         label.setFont(new Font("Thoma", Font.BOLD, 24));
         panel.add(label);
         JButton button1 = new JButton("Name Ascending");
@@ -125,7 +125,7 @@ public class QuizUI implements ActionListener {
         panel.add(button2);
         panel.add(button3);
         panel.add(button4);
-        panel.add(Box.createVerticalStrut(40));
+        panel.add(Box.createVerticalStrut(20));
     }
 
     /*
@@ -151,6 +151,7 @@ public class QuizUI implements ActionListener {
             panel.add(Box.createHorizontalStrut(15));
             counter += 1;
         }
+        panel.add(Box.createVerticalStrut(20));
         JButton confirmButton = new JButton("Select a quiz");
         confirmButton.setFont(new Font("Thoma", Font.BOLD, 24));
         confirmButton.addActionListener(this);

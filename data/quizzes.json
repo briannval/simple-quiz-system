@@ -66,5 +66,15 @@
         }],
         "name": "AllTrueFalseQuiz",
         "stars": 1
+    },
+    {
+        "questions": [{
+            "question": "2+2",
+            "format": "Numerical",
+            "correctAnswer": 4,
+            "points": 5
+        }],
+        "name": "Test",
+        "stars": 0
     }
 ]
