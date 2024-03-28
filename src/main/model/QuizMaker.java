@@ -67,6 +67,8 @@ public class QuizMaker {
      * EFFECTS: generates a new quiz with the current question
      */
     public Quiz quizGenerator() {
+        EventLog el = EventLog.getInstance();
+        el.logEvent(new Event("Created quiz named " + this.name + " with 0 starts"));
         return new Quiz(0, this.questions,this.name);
     }
 }

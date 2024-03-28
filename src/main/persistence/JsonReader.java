@@ -52,6 +52,8 @@ public class JsonReader {
         String jsonData = readFile();
         JSONArray jsonArray = new JSONArray(jsonData);
         parseQuizArray(jsonArray);
+        EventLog el = EventLog.getInstance();
+        el.logEvent(new Event("Data loaded from " + this.filePath));
         return this.quizzes;
     }
 

@@ -11,6 +11,8 @@ public class QuizAttempt {
      *          and current points set to 0
      */
     public QuizAttempt(Quiz currentQuiz) {
+        EventLog el = EventLog.getInstance();
+        el.logEvent(new Event("Attempting quiz named" + currentQuiz.getName()));
         this.currentQuiz = currentQuiz;
         this.currentPoints = 0;
     }
@@ -50,9 +52,14 @@ public class QuizAttempt {
      *          and whether the user passed
      */
     public String generateReport() {
+        EventLog el = EventLog.getInstance();
+        int score = calculatePercentage();
+        String currName = currentQuiz.getName();
         if (determinePass()) {
+            el.logEvent(new Event("An attempt of " + currName + " passed with score " + score));
             return "Congratulations! You have passed with a score of " + calculatePercentage();
         }
+        el.logEvent(new Event("An attempt of " + currName + " failed with score " + score));
         return "Try harder next time! Your score is " + calculatePercentage();
     }
 
@@ -60,7 +67,12 @@ public class QuizAttempt {
      * EFFECTS: stars the quiz in attempt
      */
     public void willStar() {
+        EventLog el = EventLog.getInstance();
         currentQuiz.starQuiz();
+        String currName = currentQuiz.getName();
+        int newStars = currentQuiz.getStars();
+        String starDescription = "Starred quiz for " + currName + " to " + newStars + " stars.";
+        el.logEvent(new Event(starDescription));
     }
 
     public int getCurrentPoints() {

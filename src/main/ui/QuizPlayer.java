@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.List;
 
 import model.*;
+import model.Event;
 import org.json.JSONArray;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -83,6 +84,10 @@ public class QuizPlayer extends QuizUser implements ActionListener {
                 break;
             case "Exit":
                 frame.dispose();
+                EventLog el = EventLog.getInstance();
+                for (Event event: el) {
+                    System.out.println(event.toString());
+                }
                 System.exit(0);
         }
     }

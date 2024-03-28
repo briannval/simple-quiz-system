@@ -112,18 +112,6 @@ public class QuizCreator extends QuizUser {
     }
 
     /*
-     * REQUIRES: user input must be in the range specified
-     * EFFECTS: prompts the user to a choice for  action
-     */
-    public int prompt() {
-        System.out.println("What format of question do you want?");
-        System.out.println("1. Multiple Choice");
-        System.out.println("2. True False");
-        System.out.println("3. Numerical");
-        return scanner.nextInt();
-    }
-
-    /*
      * REQUIRES: all the questions must be added already
      * EFFECTS: creates a quiz from all the questions specified
      */

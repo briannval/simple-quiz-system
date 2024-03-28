@@ -1,5 +1,7 @@
 package persistence;
 
+import model.Event;
+import model.EventLog;
 import org.json.JSONArray;
 
 import java.io.File;
@@ -43,5 +45,7 @@ public class JsonWriter {
      */
     public void saveToFile(JSONArray json) {
         writer.print(json.toString(4));
+        EventLog el = EventLog.getInstance();
+        el.logEvent(new Event("Data saved to " + this.filePath));
     }
 }
