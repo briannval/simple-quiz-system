@@ -2,7 +2,6 @@ package ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.List;
 
@@ -20,7 +19,6 @@ import java.awt.event.*;
 // Represents the whole quiz system with user info
 public class QuizPlayer extends QuizUser implements ActionListener {
     private static final String FILE_URL = "./data/quizzes.json";
-    private Map<String, List<Quiz>> orderedQuizBank;
     private List<Quiz> quizBank;
     private JFrame frame;
     private JPanel panel;
@@ -31,15 +29,6 @@ public class QuizPlayer extends QuizUser implements ActionListener {
     Scanner scanner;
     QuizUI quizUI;
 
-    /*
-     * REQUIRES: quizBank cannot be empty;
-     * MODIFIES: this
-     * EFFECTS: order the quiz bank by stars ascending / descending
-     *          and name ascending / descending
-     */
-    private void updateOrderedQuizBank() {
-        // pass
-    }
 
     /*
      * REQUIRES: name must be of non-zero length
@@ -62,6 +51,7 @@ public class QuizPlayer extends QuizUser implements ActionListener {
      * REQUIRES: an accurate ActionEvent performed by the button
      * EFFECTS: makes changes to the screen after user response
      */
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "CreateQuiz":

@@ -4,7 +4,6 @@ import model.Event;
 import model.EventLog;
 import org.json.JSONArray;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
@@ -28,7 +27,7 @@ public class JsonWriter {
      * EFFECTS: initializes a new PrintWriter object with the target file specified
      */
     public void openFile() throws FileNotFoundException {
-        writer = new PrintWriter(new File(this.filePath));
+        writer = new PrintWriter(this.filePath);
     }
 
     /*

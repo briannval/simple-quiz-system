@@ -66,5 +66,16 @@
         }],
         "name": "AllTrueFalseQuiz",
         "stars": 1
+    },
+    {
+        "questions": [{
+            "question": "Is it important to log?",
+            "format": "True False",
+            "correctAnswer": true,
+            "explanation": "",
+            "points": 5
+        }],
+        "name": "LoggerQuiz",
+        "stars": 1
     }
 ]

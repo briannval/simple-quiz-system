@@ -30,14 +30,14 @@ public class JsonReader {
     }
 
     /*
-     * EFFECTS: reads all of the data in the file specified by the filePath in a string format
+     * EFFECTS: reads all the data in the file specified by the filePath in a string format
      *          and returns the string
      */
     public String readFile() throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
         try (Stream<String> stream = Files.lines(Paths.get(this.filePath), StandardCharsets.UTF_8)) {
-            stream.forEach(s -> contentBuilder.append(s));
+            stream.forEach(contentBuilder::append);
         }
 
         return contentBuilder.toString();
@@ -88,7 +88,7 @@ public class JsonReader {
                     JSONArray choicesArray = new JSONArray(questionObject.get("choices").toString());
                     // Referenced from StackOverflow
                     // https://stackoverflow.com/questions/24882927/
-                    // using-streams-to-convert-a-list-of-objects-into-a-string-obtained-from-the-tostr
+                    // using-streams-to-convert-a-list-of-objects-into-a-string-obtained-from-string-conversion
                     List<String> choices = choicesArray.toList().stream()
                             .map(Object::toString)
                             .collect(Collectors.toList());

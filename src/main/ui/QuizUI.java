@@ -13,7 +13,7 @@ import java.util.List;
 // https://stackoverflow.com/questions/12542185/sort-a-java-collection-object-based-on-one-field-in-it
 // A class to display all the quizzes and sort them based on user's input
 public class QuizUI implements ActionListener {
-    private List<Quiz> playerQuizBank;
+    private final List<Quiz> playerQuizBank;
     private final Map<String, List<Quiz>> allQuizzes;
     private final String nameAscending = "name_ascending";
     private final String nameDescending = "name_descending";

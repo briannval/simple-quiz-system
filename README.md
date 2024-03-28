@@ -73,3 +73,32 @@ ascending or descending
 - You can save the state of my application by clicking the Save Data button on the main panel
 - You can reload the state of my application by clicking the Load Data button on the main panel
 
+
+# Phase 4: Task 2
+Here is a representative sample of events that occur when program runs:
+
+Wed Mar 27 23:07:36 PDT 2024
+Data loaded from ./data/quizzes.json
+Wed Mar 27 23:07:53 PDT 2024
+Created quiz named LoggerQuiz with 0 starts
+Wed Mar 27 23:08:04 PDT 2024
+Attempting quiz namedLoggerQuiz
+Wed Mar 27 23:08:07 PDT 2024
+Starred quiz for LoggerQuiz to 1 stars.
+Wed Mar 27 23:08:07 PDT 2024
+An attempt of LoggerQuiz passed with score 100
+Wed Mar 27 23:08:08 PDT 2024
+Data saved to ./data/quizzes.json
+
+
+# Phase 4: Task 3
+After looking at the UML diagram, I understood immediately extreme coupling towards the Quiz class.
+Too many classes know about the Quiz class, which probably isn't good as it could cause problems to various
+classes when a change is made in the Quiz class, whether at compile-time, or at run-time. I would refactor this,
+and not all classes need to know about Quiz. Possibly, an Observer pattern could be used.
+
+One major refactor I would make was to move the storage of quizzes in the QuizPlayer class to a model class,
+instead of storing it in the UI. That way, this would be more testable, since we technically shouldn't "keep" data in our
+UI package. It would also be easier to log it in that way. Lastly, it may be my first time using Jawa Swing UI library,
+but the next time I used it, I would make a much better way than using just OptionPanes and MessageDialogs, and actually
+organizing the frames and panels within the classes better.

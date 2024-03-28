@@ -3,14 +3,11 @@ package ui;
 import model.*;
 
 import javax.swing.*;
-import java.util.Scanner;
-import java.util.List;
 
 // Represents a class interface for users to attempt / start a quiz
 public class QuizStarter extends QuizUser {
-    private Quiz quiz;
-    private QuizAttempt attempt;
-    Scanner scanner = new Scanner(System.in);
+    private final Quiz quiz;
+    private final QuizAttempt attempt;
 
     /*
      * REQUIRES: name must be of non-zero length

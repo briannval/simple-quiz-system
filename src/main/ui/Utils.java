@@ -50,9 +50,6 @@ public class Utils {
      *          used in creating boolean questions
      */
     public static boolean charToBool(char c) {
-        if (c == 't') {
-            return true;
-        }
-        return false;
+        return c == 't';
     }
 }

@@ -2,8 +2,8 @@ package ui;
 
 // Abstract class for major UI classes
 public abstract class QuizUser {
-    private String name;
-    private int year;
+    private final String name;
+    private final int year;
 
     public QuizUser(String name, int year) {
         this.name = name;
