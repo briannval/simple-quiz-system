@@ -13,6 +13,7 @@ import java.util.List;
 // https://stackoverflow.com/questions/12542185/sort-a-java-collection-object-based-on-one-field-in-it
 // A class to display all the quizzes and sort them based on user's input
 public class QuizUI implements ActionListener {
+    private List<Quiz> playerQuizBank;
     private final Map<String, List<Quiz>> allQuizzes;
     private final String nameAscending = "name_ascending";
     private final String nameDescending = "name_descending";
@@ -22,6 +23,7 @@ public class QuizUI implements ActionListener {
     private final QuizPlayer player;
     private final JFrame frame;
     private final JPanel panel;
+    private final JScrollPane scrollPane;
     private String currState;
     private final String name;
     private final int year;
@@ -32,6 +34,7 @@ public class QuizUI implements ActionListener {
      * EFFECTS: initializes a frame of quizzes and a map of all quizzes sorted
      */
     public QuizUI(List<Quiz> quizBank, QuizStarter starter, String name, int year, QuizPlayer player) {
+        this.playerQuizBank = quizBank;
         this.allQuizzes = new HashMap<>();
         this.starter = starter;
         this.currState = "default";
@@ -44,6 +47,7 @@ public class QuizUI implements ActionListener {
         frame.setLocation(500, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
+        scrollPane = new JScrollPane(panel);
         sorter();
         initGui();
         quizGui();
@@ -95,7 +99,6 @@ public class QuizUI implements ActionListener {
         // https://stackoverflow.com/questions/5854005/setting-horizontal-and-vertical-margins
         panel.setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        frame.add(panel);
         ImageIcon icon = new ImageIcon("./public/ubccs.png");
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -138,6 +141,7 @@ public class QuizUI implements ActionListener {
     /*
      * REQUIRES: prints out all the list of quizzes onto the frame
      */
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void quizGui() {
         int counter = 1;
         for (Quiz q: getCurrStateQuizzes()) {
@@ -157,7 +161,52 @@ public class QuizUI implements ActionListener {
         confirmButton.addActionListener(this);
         confirmButton.setActionCommand("select_quiz");
         panel.add(confirmButton);
+        JButton deleteButton = new JButton("Delete a quiz");
+        deleteButton.setFont(new Font("Thoma", Font.BOLD, 24));
+        deleteButton.addActionListener(this);
+        deleteButton.setActionCommand("delete_quiz");
+        panel.add(deleteButton);
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.setFont(new Font("Thoma", Font.BOLD, 24));
+        cancelButton.addActionListener(this);
+        cancelButton.setActionCommand("cancel");
+        panel.add(cancelButton);
+        frame.add(scrollPane);
         Utils.requestFrameFocus(this.frame);
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: handles deletion of a quiz
+     */
+    private void handleDeleteQuiz() {
+        String quizSelectionString = (String) JOptionPane.showInputDialog(null,
+                "Select a number from 1 to " + getCurrStateQuizzes().size() + " to delete", "Delete Quiz",
+                JOptionPane.PLAIN_MESSAGE, Utils.generateRandomAvatar(), null, null);
+        frame.dispose();
+        Quiz deleteQuiz = getCurrStateQuizzes().get(Integer.parseInt(quizSelectionString) - 1);
+        JOptionPane.showMessageDialog(null, "We will delete " + deleteQuiz.getName(),
+                "Delete Quiz", JOptionPane.WARNING_MESSAGE);
+        this.playerQuizBank.remove(deleteQuiz);
+        player.begin();
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: handles starting of a quiz
+     */
+    private void handleStartQuiz() {
+        String quizSelectionString = (String) JOptionPane.showInputDialog(null,
+                "Select a number from 1 to " + getCurrStateQuizzes().size() + " to start", "Get Quiz",
+                JOptionPane.PLAIN_MESSAGE, Utils.generateRandomAvatar(), null, null);
+        frame.dispose();
+        Quiz startQuiz = getCurrStateQuizzes().get(Integer.parseInt(quizSelectionString) - 1);
+        JOptionPane.showMessageDialog(null, "We will now begin " + startQuiz.getName(),
+                "Start Quiz", JOptionPane.WARNING_MESSAGE);
+        starter = new QuizStarter(name, year, startQuiz);
+        starter.begin();
+        starter.createReport();
+        player.begin();
     }
 
     /*
@@ -166,23 +215,22 @@ public class QuizUI implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!e.getActionCommand().equals("select_quiz")) {
+        boolean isNameAscending = e.getActionCommand().equals(nameAscending);
+        boolean isNameDescending = e.getActionCommand().equals(nameDescending);
+        boolean isStarsAscending = e.getActionCommand().equals(starsAscending);
+        boolean isStarsDescending = e.getActionCommand().equals(starsDescending);
+        if ((isNameDescending || isStarsDescending) || (isNameAscending || isStarsAscending)) {
             this.currState = e.getActionCommand();
             Utils.resetPanel(panel);
             initGui();
             quizGui();
-        } else {
-            String quizSelectionString = (String) JOptionPane.showInputDialog(null,
-                    "Select a number from 1 to " + getCurrStateQuizzes().size(), "Get Quiz",
-                    JOptionPane.PLAIN_MESSAGE, Utils.generateRandomAvatar(), null, null);
+        } else if (e.getActionCommand().equals("delete_quiz")) {
+            handleDeleteQuiz();
+        } else if (e.getActionCommand().equals("cancel")) {
             frame.dispose();
-            Quiz startQuiz = getCurrStateQuizzes().get(Integer.parseInt(quizSelectionString) - 1);
-            JOptionPane.showMessageDialog(null, "We will now begin " + startQuiz.getName(),
-                    "Start Quiz", JOptionPane.WARNING_MESSAGE);
-            starter = new QuizStarter(name, year, startQuiz);
-            starter.begin();
-            starter.createReport();
             player.begin();
+        } else {
+            handleStartQuiz();
         }
     }
 }
