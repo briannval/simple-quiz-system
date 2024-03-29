@@ -172,7 +172,6 @@ public class QuizPlayer extends QuizUser implements ActionListener {
             jsonWriter.openFile();
             jsonWriter.saveToFile(quizzesToJson());
             jsonWriter.closeFile();
-            System.out.println("Saved all the quizzes to " + FILE_URL);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + FILE_URL);
         }

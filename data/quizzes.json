@@ -54,7 +54,7 @@
             "points": 20
         }],
         "name": "AllNumericalQuiz",
-        "stars": 0
+        "stars": 1
     },
     {
         "questions": [{
@@ -76,6 +76,28 @@
             "points": 5
         }],
         "name": "LoggerQuiz",
-        "stars": 1
+        "stars": 2
+    },
+    {
+        "questions": [{
+            "question": "I love fried chicken",
+            "format": "True False",
+            "correctAnswer": true,
+            "explanation": "",
+            "points": 5
+        }],
+        "name": "FriedChicken",
+        "stars": 0
+    },
+    {
+        "questions": [{
+            "question": "I love object oriented programming",
+            "format": "True False",
+            "correctAnswer": true,
+            "explanation": "",
+            "points": 10
+        }],
+        "name": "210Quiz",
+        "stars": 0
     }
 ]
