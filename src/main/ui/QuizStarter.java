@@ -12,7 +12,7 @@ public class QuizStarter extends QuizUser {
     /*
      * REQUIRES: name must be of non-zero length
      *           year must be UBC year (1-4)
-     * EFFECTS:
+     * EFFECTS: creates a new quiz attempt
      */
     public QuizStarter(String name, int year, Quiz quiz) {
         super(name, year);
