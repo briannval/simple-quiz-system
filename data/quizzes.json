@@ -99,5 +99,16 @@
         }],
         "name": "210Quiz",
         "stars": 0
+    },
+    {
+        "questions": [{
+            "question": "i love cheese",
+            "format": "True False",
+            "correctAnswer": true,
+            "explanation": "",
+            "points": 10
+        }],
+        "name": "cheese",
+        "stars": 1
     }
 ]

@@ -13,6 +13,10 @@ import java.util.List;
 // https://stackoverflow.com/questions/12542185/sort-a-java-collection-object-based-on-one-field-in-it
 // A class to display all the quizzes and sort them based on user's input
 public class QuizUI implements ActionListener {
+    private final Color white = new java.awt.Color(255, 255, 255);
+    private final Font smallFont = new Font("Thoma", Font.BOLD, 20);
+    private final Font mediumFont = new Font("Thoma", Font.BOLD, 24);
+    private final String imageUrl = "public/ubccs.png";
     private final List<Quiz> playerQuizBank;
     private final Map<String, List<Quiz>> allQuizzes;
     private final String nameAscending = "name_ascending";
@@ -21,9 +25,10 @@ public class QuizUI implements ActionListener {
     private final String starsDescending = "stars_descending";
     private QuizStarter starter;
     private final QuizPlayer player;
-    private final JFrame frame;
-    private final JPanel panel;
-    private final JScrollPane scrollPane;
+    private final JFrame mainFrame;
+    private final JPanel mainPanel;
+    private final JPanel quizPanel;
+    private final JPanel actionsPanel;
     private String currState;
     private final String name;
     private final int year;
@@ -31,7 +36,7 @@ public class QuizUI implements ActionListener {
     /*
      * REQUIRES: a non-empty quizBank, an initialized QuizStarter, the user's name, year of birth,
      *           and an initialized QuizPlayer
-     * EFFECTS: initializes a frame of quizzes and a map of all quizzes sorted
+     * EFFECTS: initializes a mainFrame of quizzes and a map of all quizzes sorted
      */
     public QuizUI(List<Quiz> quizBank, QuizStarter starter, String name, int year, QuizPlayer player) {
         this.playerQuizBank = quizBank;
@@ -42,12 +47,13 @@ public class QuizUI implements ActionListener {
         this.year = year;
         this.player = player;
         allQuizzes.put("default", copyQuizList(quizBank));
-        frame = new JFrame("Quiz Starter");
-        frame.setSize(400, 750);
-        frame.setLocation(500, 250);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panel = new JPanel();
-        scrollPane = new JScrollPane(panel);
+        mainFrame = new JFrame("Quiz Starter");
+        mainFrame.setSize(1100, 1000);
+        mainFrame.setLocation(250, 250);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainPanel = new JPanel();
+        quizPanel = new JPanel();
+        actionsPanel = new JPanel();
         sorter();
         initGui();
         quizGui();
@@ -94,42 +100,46 @@ public class QuizUI implements ActionListener {
      */
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void initGui() {
-        panel.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanel.setBackground(white);
         // Referenced from StackOverflow
         // https://stackoverflow.com/questions/5854005/setting-horizontal-and-vertical-margins
-        panel.setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100));
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        ImageIcon icon = new ImageIcon("./public/ubccs.png");
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setBackground(white);
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
+        ImageIcon icon = new ImageIcon(imageUrl);
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         JLabel imageLabel = new JLabel(new ImageIcon(newImage));
-        panel.add(imageLabel);
-        panel.add(Box.createVerticalStrut(20));
+        buttonsPanel.add(imageLabel);
         JLabel label = new JLabel("Sort by:");
-        label.setFont(new Font("Thoma", Font.BOLD, 24));
-        panel.add(label);
+        label.setFont(mediumFont);
+        buttonsPanel.add(label);
         JButton button1 = new JButton("Name Ascending");
         JButton button2 = new JButton("Name Descending");
         JButton button3 = new JButton("Stars Ascending");
         JButton button4 = new JButton("Stars Descending");
-        button1.setFont(new Font("Thoma", Font.PLAIN, 16));
+        button1.setFont(smallFont);
         button1.addActionListener(this);
         button1.setActionCommand(nameAscending);
-        button2.setFont(new Font("Thoma", Font.PLAIN, 16));
+        button2.setFont(smallFont);
         button2.addActionListener(this);
         button2.setActionCommand(nameDescending);
-        button3.setFont(new Font("Thoma", Font.PLAIN, 16));
+        button3.setFont(smallFont);
         button3.addActionListener(this);
         button3.setActionCommand(starsAscending);
-        button4.setFont(new Font("Thoma", Font.PLAIN, 16));
+        button4.setFont(smallFont);
         button4.addActionListener(this);
         button4.setActionCommand(starsDescending);
-        panel.add(button1);
-        panel.add(button2);
-        panel.add(button3);
-        panel.add(button4);
-        panel.add(Box.createVerticalStrut(20));
+        buttonsPanel.add(button1);
+        buttonsPanel.add(button2);
+        buttonsPanel.add(button3);
+        buttonsPanel.add(button4);
+        mainPanel.add(buttonsPanel);
+        mainPanel.add(Box.createHorizontalStrut(100));
     }
+
 
     /*
      * EFFECTS: returns a list of quizzes sorted as requested by the user
@@ -139,40 +149,54 @@ public class QuizUI implements ActionListener {
     }
 
     /*
-     * REQUIRES: prints out all the list of quizzes onto the frame
+     * EFFECTS: adds the quizzes in the HashMap to the quizPanel
      */
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    private void quizGui() {
+    private void setQuizPanel() {
         int counter = 1;
+        quizPanel.setBackground(white);
+        quizPanel.setLayout(new BoxLayout(quizPanel, BoxLayout.Y_AXIS));
         for (Quiz q: getCurrStateQuizzes()) {
             JLabel quizNameLabel = new JLabel(counter + ". " + q.getName());
             JLabel quizStarsLabel = new JLabel("Stars: " + q.getStars());
             quizNameLabel.setFont(new Font("Thoma", Font.BOLD, 18));
             quizStarsLabel.setFont(new Font("Thoma", Font.PLAIN, 18));
-            panel.add(quizNameLabel);
-            panel.add(Box.createHorizontalStrut(15));
-            panel.add(quizStarsLabel);
-            panel.add(Box.createHorizontalStrut(15));
+            quizPanel.add(quizNameLabel);
+            quizPanel.add(Box.createHorizontalStrut(15));
+            quizPanel.add(quizStarsLabel);
+            quizPanel.add(Box.createHorizontalStrut(15));
             counter += 1;
         }
-        panel.add(Box.createVerticalStrut(20));
+    }
+
+    /*
+     * REQUIRES: prints out all the list of quizzes onto the mainFrame
+     */
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    private void quizGui() {
+        JScrollPane mainScrollPane = new JScrollPane(mainPanel);
+        setQuizPanel();
+        mainPanel.add(quizPanel);
+        mainPanel.add(Box.createHorizontalStrut(100));
+        actionsPanel.setBackground(white);
+        actionsPanel.setLayout(new BoxLayout(actionsPanel, BoxLayout.Y_AXIS));
         JButton confirmButton = new JButton("Select a quiz");
-        confirmButton.setFont(new Font("Thoma", Font.BOLD, 24));
+        confirmButton.setFont(mediumFont);
         confirmButton.addActionListener(this);
         confirmButton.setActionCommand("select_quiz");
-        panel.add(confirmButton);
+        actionsPanel.add(confirmButton);
         JButton deleteButton = new JButton("Delete a quiz");
-        deleteButton.setFont(new Font("Thoma", Font.BOLD, 24));
+        deleteButton.setFont(mediumFont);
         deleteButton.addActionListener(this);
         deleteButton.setActionCommand("delete_quiz");
-        panel.add(deleteButton);
+        actionsPanel.add(deleteButton);
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.setFont(new Font("Thoma", Font.BOLD, 24));
+        cancelButton.setFont(mediumFont);
         cancelButton.addActionListener(this);
         cancelButton.setActionCommand("cancel");
-        panel.add(cancelButton);
-        frame.add(scrollPane);
-        Utils.requestFrameFocus(this.frame);
+        actionsPanel.add(cancelButton);
+        mainPanel.add(actionsPanel);
+        mainFrame.add(mainScrollPane);
+        Utils.requestFrameFocus(this.mainFrame);
     }
 
     /*
@@ -183,7 +207,7 @@ public class QuizUI implements ActionListener {
         String quizSelectionString = (String) JOptionPane.showInputDialog(null,
                 "Select a number from 1 to " + getCurrStateQuizzes().size() + " to delete", "Delete Quiz",
                 JOptionPane.PLAIN_MESSAGE, Utils.generateRandomAvatar(), null, null);
-        frame.dispose();
+        mainFrame.dispose();
         Quiz deleteQuiz = getCurrStateQuizzes().get(Integer.parseInt(quizSelectionString) - 1);
         JOptionPane.showMessageDialog(null, "We will delete " + deleteQuiz.getName(),
                 "Delete Quiz", JOptionPane.WARNING_MESSAGE);
@@ -199,7 +223,7 @@ public class QuizUI implements ActionListener {
         String quizSelectionString = (String) JOptionPane.showInputDialog(null,
                 "Select a number from 1 to " + getCurrStateQuizzes().size() + " to start", "Get Quiz",
                 JOptionPane.PLAIN_MESSAGE, Utils.generateRandomAvatar(), null, null);
-        frame.dispose();
+        mainFrame.dispose();
         Quiz startQuiz = getCurrStateQuizzes().get(Integer.parseInt(quizSelectionString) - 1);
         JOptionPane.showMessageDialog(null, "We will now begin " + startQuiz.getName(),
                 "Start Quiz", JOptionPane.WARNING_MESSAGE);
@@ -221,13 +245,12 @@ public class QuizUI implements ActionListener {
         boolean isStarsDescending = e.getActionCommand().equals(starsDescending);
         if ((isNameDescending || isStarsDescending) || (isNameAscending || isStarsAscending)) {
             this.currState = e.getActionCommand();
-            Utils.resetPanel(panel);
-            initGui();
-            quizGui();
+            Utils.resetPanel(quizPanel);
+            setQuizPanel();
         } else if (e.getActionCommand().equals("delete_quiz")) {
             handleDeleteQuiz();
         } else if (e.getActionCommand().equals("cancel")) {
-            frame.dispose();
+            mainFrame.dispose();
             player.begin();
         } else {
             handleStartQuiz();

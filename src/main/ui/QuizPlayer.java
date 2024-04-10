@@ -93,14 +93,14 @@ public class QuizPlayer extends QuizUser implements ActionListener {
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void initGUI() {
         frame = new JFrame("Quiz Player");
-        frame.setSize(450, 550);
-        frame.setLocation(500, 250);
+        frame.setSize(450, 800);
+        frame.setLocation(500, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
         panel.setBackground(new java.awt.Color(255, 255, 255));
         // Referenced from StackOverflow
         // https://stackoverflow.com/questions/5854005/setting-horizontal-and-vertical-margins
-        panel.setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100));
+        panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 50, 100));
         panel.setLayout(new FlowLayout());
         frame.add(panel);
 
@@ -114,15 +114,19 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         JButton button3 = new JButton("Load local data");
         JButton button4 = new JButton("Save local data");
         JButton button5 = new JButton("Exit and close");
-        button1.setFont(new Font("Thoma", Font.PLAIN, 16));
-        button2.setFont(new Font("Thoma", Font.PLAIN, 16));
-        button3.setFont(new Font("Thoma", Font.PLAIN, 16));
-        button4.setFont(new Font("Thoma", Font.PLAIN, 16));
-        button5.setFont(new Font("Thoma", Font.PLAIN, 16));
+        button1.setFont(new Font("Thoma", Font.PLAIN, 24));
+        button2.setFont(new Font("Thoma", Font.PLAIN, 24));
+        button3.setFont(new Font("Thoma", Font.PLAIN, 24));
+        button4.setFont(new Font("Thoma", Font.PLAIN, 24));
+        button5.setFont(new Font("Thoma", Font.PLAIN, 24));
         panel.add(button1);
+        panel.add(Box.createVerticalStrut(15));
         panel.add(button2);
+        panel.add(Box.createVerticalStrut(15));
         panel.add(button3);
+        panel.add(Box.createVerticalStrut(15));
         panel.add(button4);
+        panel.add(Box.createVerticalStrut(15));
         panel.add(button5);
 
         button1.addActionListener(this);
