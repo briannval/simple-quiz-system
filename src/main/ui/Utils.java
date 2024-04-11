@@ -37,7 +37,7 @@ public class Utils {
     public static ImageIcon generateRandomAvatar() {
         Random random = new Random();
         int randomNumber = random.nextInt(7) + 1;
-        ImageIcon icon = new ImageIcon("./public/avatar" + randomNumber + ".jpeg");
+        ImageIcon icon = new ImageIcon("./public/avatar" + 1 + ".jpeg");
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         return new ImageIcon(newImage);

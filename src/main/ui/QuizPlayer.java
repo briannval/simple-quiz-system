@@ -97,11 +97,10 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         frame.setLocation(500, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
-        panel.setBackground(new java.awt.Color(255, 255, 255));
         // Referenced from StackOverflow
         // https://stackoverflow.com/questions/5854005/setting-horizontal-and-vertical-margins
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 50, 100));
-        panel.setLayout(new FlowLayout());
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 18));
         frame.add(panel);
 
         JLabel label = new JLabel("Welcome, " + super.getName() + "!");
@@ -114,11 +113,11 @@ public class QuizPlayer extends QuizUser implements ActionListener {
         JButton button3 = new JButton("Load local data");
         JButton button4 = new JButton("Save local data");
         JButton button5 = new JButton("Exit and close");
-        button1.setFont(new Font("Thoma", Font.PLAIN, 24));
-        button2.setFont(new Font("Thoma", Font.PLAIN, 24));
-        button3.setFont(new Font("Thoma", Font.PLAIN, 24));
-        button4.setFont(new Font("Thoma", Font.PLAIN, 24));
-        button5.setFont(new Font("Thoma", Font.PLAIN, 24));
+        button1.setFont(new Font("Thoma", Font.PLAIN, 20));
+        button2.setFont(new Font("Thoma", Font.PLAIN, 20));
+        button3.setFont(new Font("Thoma", Font.PLAIN, 20));
+        button4.setFont(new Font("Thoma", Font.PLAIN, 20));
+        button5.setFont(new Font("Thoma", Font.PLAIN, 20));
         panel.add(button1);
         panel.add(Box.createVerticalStrut(15));
         panel.add(button2);

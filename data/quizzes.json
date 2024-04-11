@@ -80,17 +80,6 @@
     },
     {
         "questions": [{
-            "question": "I love fried chicken",
-            "format": "True False",
-            "correctAnswer": true,
-            "explanation": "",
-            "points": 5
-        }],
-        "name": "FriedChicken",
-        "stars": 0
-    },
-    {
-        "questions": [{
             "question": "I love object oriented programming",
             "format": "True False",
             "correctAnswer": true,
@@ -101,14 +90,34 @@
         "stars": 0
     },
     {
-        "questions": [{
-            "question": "i love cheese",
-            "format": "True False",
-            "correctAnswer": true,
-            "explanation": "",
-            "points": 10
-        }],
-        "name": "cheese",
+        "questions": [
+            {
+                "question": "What is this course?",
+                "format": "Multiple Choice",
+                "correctAnswer": 97,
+                "choices": [
+                    "CPSC 210",
+                    "CPSC 110",
+                    "CPSC 121",
+                    "CPSC 213"
+                ],
+                "points": 10
+            },
+            {
+                "question": "CPSC 210 is amazing!",
+                "format": "True False",
+                "correctAnswer": true,
+                "explanation": "",
+                "points": 10
+            },
+            {
+                "question": "What is 1+1",
+                "format": "Numerical",
+                "correctAnswer": 2,
+                "points": 10
+            }
+        ],
+        "name": "Example Quiz",
         "stars": 1
     }
 ]
